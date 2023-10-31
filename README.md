@@ -55,4 +55,4 @@ Liste os pré-requisitos (por exemplo, Node.js, Python, etc.)
 Contato 💌
 Felipe Cavalcanti - @fcavalcantirj - contato@analisegrupal.com.br
 
-Link do projeto: https://github.com/fcavalcantirj/analise-grupal
+Link do projeto: https://github.com/fcavalcantirj/analise-grupal-html
