@@ -1,6 +1,6 @@
 # Análise Grupal 📊📱
 
-![LOGO ANALISE GRUPAL](./analise_grupal_logo.png))
+![LOGO ANALISE GRUPAL](./analise_grupal_logo.png)
 
 Uma plataforma moderna e open-source para analisar dados de bate-papo do WhatsApp. Faça upload do seu chat e mergulhe em métricas e visualizações reveladoras. Entenda melhor seu grupo!
 
