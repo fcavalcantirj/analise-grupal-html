@@ -258,7 +258,7 @@
               .catch(error => {
                   console.error('Error fetching the image:', error);
                   img.width = 100;
-                  img.src = "error.png";
+                  img.src = "img/error.png";
 
                   processEndpoint(index + 1, formData);  // Process the next endpoint
               });
