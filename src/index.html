@@ -162,7 +162,8 @@
       }
 
       function fetchData(endpoint, formData, retries = 0) {
-          return fetch('http://localhost:5000' + endpoint, {
+            return fetch('https://api.analisegrupal.com.br' + endpoint, {
+          // return fetch('http://localhost:5000' + endpoint, {
               method: 'POST',
               body: formData
           })
