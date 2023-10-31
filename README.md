@@ -6,6 +6,8 @@ Uma plataforma moderna e open-source para analisar dados de bate-papo do WhatsAp
 
 **NENHUM DADO É GUARDADO - ANÁLISES FEITAS EM MEMÓRIA E RETORNADAS DIRETAMENTE PARA O CLIENT**
 
+**Link da API BETA do projeto: https://github.com/fcavalcantirj/analise-grupal-api**
+
 [![Licença GitHub](https://img.shields.io/github/license/fcavalcantirj/analise-grupal-api)](https://github.com/fcavalcantirj/analise-grupal-api/blob/main/LICENSE)
 [![Problemas GitHub](https://img.shields.io/github/issues/fcavalcantirj/analise-grupal-api)](https://github.com/fcavalcantirj/analise-grupal-api/issues)
 
@@ -55,4 +57,4 @@ Node.js
 Contato 💌
 Felipe Cavalcanti - @fcavalcantirj - contato@analisegrupal.com.br
 
-Link do projeto: https://github.com/fcavalcantirj/analise-grupal-api
+Link do projeto: https://github.com/fcavalcantirj/analise-grupal-html
