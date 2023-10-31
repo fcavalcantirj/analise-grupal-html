@@ -24,8 +24,10 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: Arial, sans-serif;
         }
         body {
+            background-color: #72684F;
             font-family: Arial, sans-serif;
             min-height: 100vh;
             display: flex;
@@ -35,11 +37,18 @@
         }
 
         h1 {
-            margin-bottom: 20px;
+              color: #333;
+              margin-bottom: 2rem;
+              font-size: 2rem;
         }
 
         form {
-            margin-bottom: 30px;
+            background-color: #FFF;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 480px;
         }
 
         img {
@@ -58,6 +67,34 @@
             margin: 20px 0;
         }
 
+      label {
+          display: block;
+          margin-bottom: 1rem;
+          color: #555;
+          font-weight: bold;
+      }
+
+      input[type="file"] {
+          margin-bottom: 1.5rem;
+          padding: 0.5rem;
+          border: 1px solid #AAA;
+          border-radius: 4px;
+      }
+
+      input[type="submit"] {
+          background-color: #4CAF50;
+          color: #FFF;
+          padding: 0.5rem 1rem;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+      }
+
+      input[type="submit"]:hover {
+          background-color: #45a049;
+      }
+
         iframe {
             width: 100%;
             margin: 0;
@@ -70,12 +107,14 @@
 <body>
 
   <!-- Add your site or application content here -->
-  <h1>Análise Grupal BETA</h1>
+  <!-- <h1>Análise Grupal BETA</h1> -->
+  <img src="img/analise_grupal_logo.png">
 
   <form id="uploadForm" enctype="multipart/form-data" onsubmit="return submitForm();">
       <label for="file">Faça upload de um chat do whatsApp:</label>
+      <label for="file">nenhum dado é armazenado!!!</label>
       <input type="file" name="file" required>
-      <input type="submit" value="Upload">
+      <input type="submit" value="Carregar e Analisar">
   </form>
 
   <div id="analysisResults"></div>
@@ -236,6 +275,10 @@
           return false;  // Prevent actual form submission
       }
   </script>
+  <a href="https://github.com/fcavalcantirj/analise-grupal-html" style="position: absolute; top: 0; right: 0; z-index: 100;">
+    <img decoding="async" width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_orange_ff7600.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" loading="lazy" data-recalc-dims="1">
+</a>
+
 </body>
 
 </html>
