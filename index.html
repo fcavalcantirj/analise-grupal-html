@@ -196,7 +196,7 @@
           if (endpoint === "/whatsapp/message/topic_modeling") {
               const placeholderImg = document.createElement('img');
               placeholderImg.src = "img/loading.gif";
-              placeholderImg.width = 200;
+              placeholderImg.width = 100;
               resultsDiv.appendChild(placeholderImg);
 
               fetchData(endpoint, formData)
@@ -242,7 +242,7 @@
               const img = document.createElement('img');
               img.id = 'image' + (index + 1);
               img.alt = title.innerText;
-              img.width = 200;
+              img.width = 100;
               img.src = "img/loading.gif";
               resultsDiv.appendChild(img);
 
