@@ -74,6 +74,13 @@
           font-weight: bold;
       }
 
+      span {
+          display: block;
+          margin-bottom: 1rem;
+          color: #555;
+          font-weight: bold;
+      }
+
       input[type="file"] {
           margin-bottom: 1.5rem;
           padding: 0.5rem;
@@ -110,8 +117,9 @@
   <img src="img/analise_grupal_logo.png">
 
   <form id="uploadForm" enctype="multipart/form-data" onsubmit="return submitForm();">
-      <label for="file">Faça upload de um chat do whatsApp [BETA]:</label>
-      <label for="file">nenhum dado é armazenado!!!</label>
+      <span>Clique <a href="https://faq.whatsapp.com/1180414079177245/?locale=pt_BR" target="_blank">aqui</a> para aprender a exportar o chat</span>
+      <label for="file">Faça upload de um chat (txt) do whatsApp [BETA]:</label>
+      <label for="file">obs: nenhum dado é armazenado!!!</label>
       <input type="file" name="file" required>
       <input type="submit" value="Carregar e Analisar">
   </form>
