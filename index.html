@@ -149,7 +149,28 @@
           // '/whatsapp/message/topic_modeling' // not working
       ];
 
+      const endpointTitles = {
+          'avg_sentiment_per_person': 'Sentimento Médio por Pessoa',
+          'sentiment_over_time': 'Sentimento ao Longo do Tempo',
+          'peak_response_time': 'Horário de Maior Resposta',
+          'activity_heatmap': 'Mapa de Calor da Atividade',
+          'user_activity_over_time': 'Atividade do Usuário ao Longo do Tempo',
+          'conversational_turns': 'Mudanças na Conversa',
+          'active_days': 'Dias Ativos',
+          'topic_percentage': 'Percentual de Tópicos',
+          '25': 'Frequência de Palavras (Top 25)', // Supondo que '25' seja para as top 25 frequências de palavras
+          'wordcloud': 'Nuvem de Palavras',
+          '10': 'Mensagens Mais Longas (Top 10)', // Supondo que '10' seja para as top 10 mensagens mais longas
+          'distribution': 'Distribuição de Sentimento',
+          'heatmap': 'Mapa de Calor por Hora',
+          'usercount': 'Contagem de Mensagens por Usuário',
+          'activeusers': 'Usuários Mais Ativos (Top 10)', // Supondo que '10' seja para os top 10 usuários mais ativos
+          // 'topic_modeling': 'Modelagem de Tópicos' // não está funcionando
+      };
+
       const MAX_RETRIES = 3;
+      // const API_DOMAIN = 'https://api.analisegrupal.com.br'
+      const API_DOMAIN = 'http://localhost:5000'
 
       function validateImage(blob) {
           return new Promise((resolve, reject) => {
@@ -162,7 +183,7 @@
       }
 
       function fetchData(endpoint, formData, retries = 0) {
-            return fetch('https://api.analisegrupal.com.br' + endpoint, {
+            return fetch(API_DOMAIN + endpoint, {
           // return fetch('http://localhost:5000' + endpoint, {
               method: 'POST',
               body: formData
@@ -190,7 +211,9 @@
           const resultsDiv = document.getElementById('analysisResults');
 
           const title = document.createElement('h3');
-          title.innerText = endpoint.split('/').pop().replace(/_/g, ' ').toUpperCase();
+          let endpointKey = endpoint.split('/').pop();
+          let titleText = endpointTitles[endpointKey] || "Unknown";
+          title.innerText = titleText;
           resultsDiv.appendChild(title);
 
           if (endpoint === "/whatsapp/message/topic_modeling") {
