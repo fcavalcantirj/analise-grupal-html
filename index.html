@@ -150,21 +150,21 @@
       ];
 
       const endpointTitles = {
-          'avg_sentiment_per_person': 'Média de sentimento por pessoa',
-          'sentiment_over_time': 'Sentimento ao Longo do Tempo',
-          'peak_response_time': 'Horário de Maior Resposta',
-          'activity_heatmap': 'Número de mensagems X Hora do dia',
-          'user_activity_over_time': 'Atividade dos Usuário ao Longo do Tempo',
-          'conversational_turns': 'Quem mais "puxa novos papos" e/ou "respondem menos"',
-          'active_days': 'Número de mensagens por dia da semana',
-          'topic_percentage': 'Percentual de Tópicos',
-          '25': 'Frequência de Palavras (Top 25)', // Supondo que '25' seja para as top 25 frequências de palavras
-          'wordcloud': 'Nuvem de Palavras',
-          '10': 'Número de mensagens por Usuário', // Supondo que '10' seja para as top 10 mensagens mais longas
-          'distribution': 'Palavras negativas / positivas (LeIA/Vader sentiment analysis)',
-          'heatmap': 'Mapa de calor | Mensagens enviadas por hora',
-          'usercount': 'TOP 20 que mais enviam | BOTTOM 5 que menos enviam',
-          'activeusers': 'Número de mensagens por Usuário', // Supondo que '10' seja para os top 10 usuários mais ativos
+          'message/avg_sentiment_per_person': 'Média de sentimento por pessoa',
+          'message/sentiment_over_time': 'Sentimento ao Longo do Tempo',
+          'message/peak_response_time': 'Picos de mensagens por Usuário por hora',
+          'message/activity_heatmap': 'Número de mensagems X Hora do dia',
+          'message/user_activity_over_time': 'Atividade dos Usuários ao Longo do Tempo',
+          'message/conversational_turns': 'Quem mais "puxa novos papos" e/ou "respondem menos"',
+          'message/active_days': 'Número de mensagens por dia da semana',
+          'message/topic_percentage': 'Percentual de Tópicos',
+          'wordfrequency/25': 'Frequência de Palavras (Top 25)',
+          'message/wordcloud': 'Nuvem de Palavras',
+          'top/10': '10 usuários que mandam as maiores mensagens',
+          'sentiment/distribution': 'Palavras negativas / positivas (LeIA/Vader sentiment analysis)',
+          'message/heatmap': 'Mapa de calor | Mensagens enviadas por hora',
+          'message/usercount': 'TOP 20 que mais enviam | BOTTOM 5 que menos enviam',
+          'activeusers/10': 'TOP 10 Usuários que mais enviam mensagens',
           // 'topic_modeling': 'Modelagem de Tópicos' // não está funcionando
       };
 
@@ -211,7 +211,8 @@
           const resultsDiv = document.getElementById('analysisResults');
 
           const title = document.createElement('h3');
-          let endpointKey = endpoint.split('/').pop();
+          let parts = endpoint.split('/');
+          let endpointKey = parts.slice(-2).join('/');
           let titleText = endpointTitles[endpointKey] || "Unknown";
           title.innerText = titleText;
           resultsDiv.appendChild(title);
