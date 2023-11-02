@@ -120,7 +120,7 @@
       <span>Clique <a href="https://faq.whatsapp.com/1180414079177245/?locale=pt_BR" target="_blank">aqui</a> para aprender a exportar o chat</span>
       <label for="file">Faça upload de um chat do whatsApp [BETA]:</label>
       <label for="file">obs: nenhum dado é armazenado!!!</label>
-      <input type="file" name="file" required>
+      <input type="file" name="file" required id="file">
       <input type="submit" value="Carregar e Analisar">
   </form>
 
@@ -180,6 +180,46 @@
       const API_DOMAIN = 'https://api.analisegrupal.com.br'
       // const API_DOMAIN = 'http://localhost:5000'
 
+      function shareOnWhatsApp(imageUrl, customMessage) {
+          const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+          const encodedImageUrl = encodeURIComponent('----> ' + imageUrl);
+          const encodedMessage = encodeURIComponent(customMessage);
+          const whatsappUrl = isMobile ? `whatsapp://send?text=${encodedMessage}%20${encodedImageUrl}`
+                                       : `https://web.whatsapp.com/send?text=${encodedMessage}%20${encodedImageUrl}`;
+          window.open(whatsappUrl, '_blank');
+      }
+
+      function uploadToImgur(imageId) {
+          const imgElement = document.getElementById(imageId);
+          fetch(imgElement.src)
+          .then(res => res.blob())
+          .then(blob => {
+              validateImage(blob).then(validBlob => {
+                  let formData = new FormData();
+                  formData.append('image', validBlob);
+
+                  fetch(API_DOMAIN + '/upload_to_imgur', {
+                      method: 'POST',
+                      body: formData
+                  })
+                  .then(response => response.json())
+                  .then(data => {
+                    if (data.link) {
+                        shareOnWhatsApp(data.link, '🚀 Descubra as dinâmicas ocultas do nosso grupo do WhatsApp com esta análise! 📊🧐 Confira no https://analisegrupal.com.br/ #AnáliseGrupal [BETA]');
+                    } else {
+                      // todo alert?
+                        throw new Error('Imgur upload failed or no link returned.');
+                    }
+                  })
+                  .catch(error => {
+                      console.error('Error uploading to Imgur or sharing on WhatsApp:', error);
+                  });
+              }).catch(error => {
+                  console.error('Invalid image for upload:', error);
+              });
+          });
+      }
+
       function validateImage(blob) {
           return new Promise((resolve, reject) => {
               const imageUrl = URL.createObjectURL(blob);
@@ -225,6 +265,12 @@
           title.innerText = titleText;
           resultsDiv.appendChild(title);
 
+          const uploadButton = document.createElement('img');
+          uploadButton.src = 'img/share_whatsapp.png';
+          uploadButton.width = 50
+          uploadButton.alt = 'Clique para compartilhar pelo whatsapp';
+          uploadButton.style.cursor = 'pointer';
+
           if (endpoint === "/whatsapp/message/topic_modeling") {
               const placeholderImg = document.createElement('img');
               placeholderImg.src = "img/loading.gif";
@@ -255,7 +301,7 @@
                   // Remove or hide the placeholder image after the content is loaded
                   resultsDiv.removeChild(placeholderImg);
 
-                  iframe.onload = () => iframe.scrollIntoView({ behavior: 'smooth' });
+                  iframe.onload = () => iframe.scrollIntoView({ behavior: 'smooth' }); 
 
                   processEndpoint(index + 1, formData);  // Process the next endpoint
               })
@@ -284,6 +330,9 @@
                   img.width = 1200;
                   img.src = imageUrl;
                   img.onload = () => img.scrollIntoView({ behavior: 'smooth' });
+
+                  uploadButton.onclick = () => uploadToImgur(img.id);
+                  resultsDiv.insertBefore(uploadButton, img.nextSibling);
 
                   processEndpoint(index + 1, formData);  // Process the next endpoint
               })
