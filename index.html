@@ -118,7 +118,7 @@
 
   <form id="uploadForm" enctype="multipart/form-data" onsubmit="return submitForm();">
       <span>Clique <a href="https://faq.whatsapp.com/1180414079177245/?locale=pt_BR" target="_blank">aqui</a> para aprender a exportar o chat</span>
-      <label for="file">Faça upload de um chat (txt) do whatsApp [BETA]:</label>
+      <label for="file">Faça upload de um chat do whatsApp [BETA]:</label>
       <label for="file">obs: nenhum dado é armazenado!!!</label>
       <input type="file" name="file" required>
       <input type="submit" value="Carregar e Analisar">
@@ -158,7 +158,7 @@
       ];
 
       const endpointTitles = {
-          'message/avg_sentiment_per_person': 'Média de sentimento por pessoa',
+          'message/avg_sentiment_per_person': 'Acima de 0 - palavras positivas | abaixo de 0 - negativas',
           'message/sentiment_over_time': 'Sentimento ao Longo do Tempo',
           'message/peak_response_time': 'Picos de mensagens por Usuário por hora',
           'message/activity_heatmap': 'Número de mensagems X Hora do dia',
@@ -166,10 +166,10 @@
           'message/conversational_turns': 'Quem mais "puxa novos papos" e/ou "respondem menos"',
           'message/active_days': 'Número de mensagens por dia da semana',
           'message/topic_percentage': 'Percentual de Tópicos',
-          'wordfrequency/25': 'Frequência de Palavras (Top 25)',
-          'message/wordcloud': 'Nuvem de Palavras',
+          'wordfrequency/25': 'Frequência de Palavras que mais aparecem (Top 25)',
+          'message/wordcloud': 'Nuvem de Palavras | WordCloud',
           'top/10': '10 usuários que mandam as maiores mensagens',
-          'sentiment/distribution': 'Palavras negativas / positivas (LeIA/Vader sentiment analysis)',
+          'sentiment/distribution': 'Média de sentimento (LeIA/Vader sentiment analysis)',
           'message/heatmap': 'Mapa de calor | Mensagens enviadas por hora',
           'message/usercount': 'TOP 20 que mais enviam | BOTTOM 5 que menos enviam',
           'activeusers/10': 'TOP 10 Usuários que mais enviam mensagens',
