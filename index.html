@@ -78,7 +78,6 @@
           display: block;
           margin-bottom: 1rem;
           color: #555;
-          font-weight: bold;
       }
 
       input[type="file"] {
@@ -119,9 +118,10 @@
   <form id="uploadForm" enctype="multipart/form-data" onsubmit="return submitForm();">
       <span>Clique <a href="https://faq.whatsapp.com/1180414079177245/?locale=pt_BR" target="_blank">aqui</a> para aprender a exportar o chat</span>
       <label for="file">Faça upload de um chat do whatsApp [BETA]:</label>
-      <label for="file">obs: nenhum dado é armazenado!!!</label>
       <input type="file" name="file" required id="file">
       <input type="submit" value="Carregar e Analisar">
+      <span style="margin-top: 2rem;">obs: <b>nenhum</b> dado é armazenado!!!</span>
+      <span>Não entendi nada ---> <a href="about.html">clique aqui</a></span>
   </form>
 
   <div id="analysisResults"></div>
