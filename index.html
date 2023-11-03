@@ -218,10 +218,12 @@
           const encodedMessage = encodeURIComponent(customMessage);
           const whatsappUrl = isMobile ? `whatsapp://send?text=${encodedMessage}%20${encodedImageUrl}`
                                        : `https://web.whatsapp.com/send?text=${encodedMessage}%20${encodedImageUrl}`;
+          trackEvent('share', 'WhatsApp', 'Content Share', 1);
           window.open(whatsappUrl, '_blank');
       }
 
       function uploadToImgur(imageId) {
+        trackEvent('share', 'WhatsApp', 'Content Share Try', 1);
           const imgElement = document.getElementById(imageId);
           fetch(imgElement.src)
           .then(res => res.blob())
@@ -239,8 +241,12 @@
                     if (data.link) {
                         shareOnWhatsApp(data.link, '🚀 Descubra as dinâmicas ocultas do nosso grupo do WhatsApp com esta análise! 📊🧐 Confira no https://analisegrupal.com.br/ #AnáliseGrupal [BETA]');
                     } else {
-                      // todo alert?
-                        throw new Error('Imgur upload failed or no link returned.');
+                      // console.log(data)
+                      const error = data.response.data.error
+                      if(error) {
+                        alert(error)
+                      }
+                      throw new Error('Imgur upload failed or no link returned.');
                     }
                   })
                   .catch(error => {
@@ -382,9 +388,17 @@
           const resultsDiv = document.getElementById('analysisResults');
           resultsDiv.innerHTML = "";  // Clear previous results
 
+          trackEvent('submit', 'Form', 'Chat Upload', 1);
           processEndpoint(0, formData);  // Start processing from the first endpoint
 
           return false;  // Prevent actual form submission
+      }
+      function trackEvent(action, category, label, value) {
+          gtag('event', action, {
+              'event_category': category,
+              'event_label': label,
+              'value': value
+          });
       }
   </script>
   <a href="https://github.com/fcavalcantirj/analise-grupal-html" style="position: absolute; top: 0; right: 0; z-index: 100;">
