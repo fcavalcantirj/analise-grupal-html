@@ -229,12 +229,12 @@
           const whatsappUrl = isMobile ? `whatsapp://send?text=${encodedMessage}%20${encodedImageUrl}`
                                        : `https://web.whatsapp.com/send?text=${encodedMessage}%20${encodedImageUrl}`;
           trackEvent('share', 'WhatsApp', 'Content Share', 1);
-          gtag('share', 'WhatsApp', {'send_to': 'AW-11398970229/w499CJ7ZufMYEPX2ubsq'});
           window.open(whatsappUrl, '_blank');
       }
 
       function uploadToImgur(imageId) {
         trackEvent('share', 'WhatsApp', 'Content Share Try', 1);
+        gtag('share', 'WhatsApp', {'send_to': 'AW-11398970229/w499CJ7ZufMYEPX2ubsq'});
           const imgElement = document.getElementById(imageId);
           fetch(imgElement.src)
           .then(res => res.blob())
@@ -400,6 +400,7 @@
           resultsDiv.innerHTML = "";  // Clear previous results
 
           trackEvent('submit', 'Form', 'Chat Upload', 1);
+          gtag('submit', 'Form', {'send_to': 'AW-11398970229/w499CJ7ZufMYEPX2ubsq'});
           processEndpoint(0, formData);  // Start processing from the first endpoint
 
           return false;  // Prevent actual form submission
