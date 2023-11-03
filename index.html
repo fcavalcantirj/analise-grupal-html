@@ -229,6 +229,7 @@
           const whatsappUrl = isMobile ? `whatsapp://send?text=${encodedMessage}%20${encodedImageUrl}`
                                        : `https://web.whatsapp.com/send?text=${encodedMessage}%20${encodedImageUrl}`;
           trackEvent('share', 'WhatsApp', 'Content Share', 1);
+          gtag('share', 'WhatsApp', {'send_to': 'AW-11398970229/w499CJ7ZufMYEPX2ubsq'});
           window.open(whatsappUrl, '_blank');
       }
 
