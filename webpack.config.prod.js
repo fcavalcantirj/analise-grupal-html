@@ -20,6 +20,7 @@ module.exports = merge(common, {
         { from: 'favicon-32x32.png', to: 'favicon-32x32.png' },
         { from: 'favicon.ico', to: 'favicon.ico' },
         { from: '404.html', to: '404.html' },
+        { from: 'about.html', to: 'about.html' },
         { from: 'site.webmanifest', to: 'site.webmanifest' },
       ],
     }),
