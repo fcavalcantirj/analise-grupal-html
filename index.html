@@ -231,8 +231,14 @@
           const whatsappUrl = isMobile ? `whatsapp://send?text=${encodedMessage}%20${encodedImageUrl}`
                                        : `https://web.whatsapp.com/send?text=${encodedMessage}%20${encodedImageUrl}`;
           trackEvent('share', 'WhatsApp', 'Content Share', 1);
-          // window.open(whatsappUrl, '_blank');
-          window.open(whatsappUrl);
+
+          // Try to open a new window
+          const newWindow = window.open(whatsappUrl, '_blank');
+          
+          // If a popup blocker prevents the new window, set the location of the current window
+          if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+              window.location.href = whatsappUrl;
+          }
       }
 
       function uploadToImgur(index) {
