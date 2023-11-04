@@ -160,19 +160,22 @@
               'value': value
           });
       }
-      function gtag_report_conversion(url) {
-        var callback = function () {
-          if (typeof(url) != 'undefined') {
-            window.location = url;
-          }
+    </script>
+    <script>
+    function gtag_report_conversion(url) {
+      var callback = function () {
+        if (typeof(url) != 'undefined') {
+          //window.location = url;
+        }
       };
       gtag('event', 'conversion', {
           'send_to': 'AW-11398970229/cB2_CK7l4fMYEPX2ubsq',
           'event_callback': callback
-            });
-        return false;
-      }
+      });
+      return false;
+    }
     </script>
+
 
 </head>
 
@@ -433,7 +436,7 @@
 
           trackEvent('submit', 'Form', 'Chat Upload', 1);
           gtag('submit', 'Form', {'send_to': 'AW-11398970229/w499CJ7ZufMYEPX2ubsq'});
-          gtag('event', 'conversion', { 'send_to': 'AW-11398970229/cB2_CK7l4fMYEPX2ubsq'});
+          gtag_report_conversion('http://analisegrupal.com.br/index.html')
 
           processEndpoint(0, formData);  // Start processing from the first endpoint
 
