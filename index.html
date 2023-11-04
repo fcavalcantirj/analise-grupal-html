@@ -431,13 +431,13 @@
           const resultsDiv = document.getElementById('analysisResults');
           resultsDiv.innerHTML = "";  // Clear previous results
 
-          gtag_report_conversion("http://analisegrupal.com.br/index.html")
           trackEvent('submit', 'Form', 'Chat Upload', 1);
           gtag('submit', 'Form', {'send_to': 'AW-11398970229/w499CJ7ZufMYEPX2ubsq'});
 
           processEndpoint(0, formData);  // Start processing from the first endpoint
 
-          return false;  // Prevent actual form submission
+          // return false;  // Prevent actual form submission
+          return gtag_report_conversion("http://analisegrupal.com.br/index.html")
       }
   </script>
   <a href="https://github.com/fcavalcantirj/analise-grupal-html" style="position: absolute; top: 0; right: 0; z-index: 100;">
