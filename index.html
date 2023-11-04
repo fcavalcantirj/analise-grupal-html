@@ -140,6 +140,40 @@
         color: #aaa;
     }
     </style>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DTBLS7LPL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      // Your Google Analytics ID
+      gtag('config', 'G-7DTBLS7LPL');
+
+      // Your Google Ads ID, for conversion tracking
+      gtag('config', 'AW-11398970229');
+
+      function trackEvent(action, category, label, value) {
+          gtag('event', action, {
+              'event_category': category,
+              'event_label': label,
+              'value': value
+          });
+      }
+      function gtag_report_conversion(url) {
+        var callback = function () {
+          if (typeof(url) != 'undefined') {
+            window.location = url;
+          }
+      };
+      gtag('event', 'conversion', {
+          'send_to': 'AW-11398970229/cB2_CK7l4fMYEPX2ubsq',
+          'event_callback': callback
+            });
+        return false;
+      }
+    </script>
+
 </head>
 
 <body>
@@ -160,25 +194,6 @@
 
 
   <script src="js/app.js"></script>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DTBLS7LPL"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-7DTBLS7LPL');
-  </script>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11398970229">
-  </script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'AW-11398970229');
-  </script>
   <script>
       const endpoints = [
           '/whatsapp/message/avg_sentiment_per_person',
@@ -412,22 +427,19 @@
       }
 
       function submitForm() {
+          onclick="goog_report_conversion('http://example.com/your-link')" href="http://example.com/your-link"
+
           var formData = new FormData(document.getElementById('uploadForm'));
           const resultsDiv = document.getElementById('analysisResults');
           resultsDiv.innerHTML = "";  // Clear previous results
 
+          gtag_report_conversion("http://analisegrupal.com.br/index.html")
           trackEvent('submit', 'Form', 'Chat Upload', 1);
           gtag('submit', 'Form', {'send_to': 'AW-11398970229/w499CJ7ZufMYEPX2ubsq'});
+
           processEndpoint(0, formData);  // Start processing from the first endpoint
 
           return false;  // Prevent actual form submission
-      }
-      function trackEvent(action, category, label, value) {
-          gtag('event', action, {
-              'event_category': category,
-              'event_label': label,
-              'value': value
-          });
       }
   </script>
   <a href="https://github.com/fcavalcantirj/analise-grupal-html" style="position: absolute; top: 0; right: 0; z-index: 100;">
