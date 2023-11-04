@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Analise Grupal BETA</title>
+  <title>Analise Grupal</title>
   <link rel="stylesheet" href="css/style.css">
   <meta name="description" content="Descubra mais sobre o Analise Grupal, um projeto open-source para análise de chats do WhatsApp que assegura total privacidade e não armazena dados.">
 
@@ -170,7 +170,7 @@
 
   <form id="uploadForm" enctype="multipart/form-data" onsubmit="return submitForm();">
       <span>Clique <a href="https://tecnoblog.net/responde/whatsapp-salvar-historico-conversa/" target="_blank">aqui</a> para aprender a exportar o chat</span>
-      <label for="file">Faça upload de um chat do whatsApp [BETA]:</label>
+      <label for="file">Faça upload de um chat do whatsApp:</label>
       <input type="file" name="file" required id="file">
       <input type="submit" value="Carregar e Analisar">
       <span style="margin-top: 2rem;">obs: <b>nenhum</b> dado é armazenado!!!</span>
@@ -259,7 +259,7 @@
                   .then(data => {
                     spinnerElemment.style.display = 'none';
                     if (data.link) {
-                        shareOnWhatsApp(data.link, '🚀 Descubra as estatísticas do nosso grupo do WhatsApp com esta análise! 📊🧐 Confira no https://analisegrupal.com.br/ #AnáliseGrupal [BETA]');
+                        shareOnWhatsApp(data.link, '🚀 Descubra as estatísticas do nosso grupo do WhatsApp com esta análise! 📊🧐 Confira no https://analisegrupal.com.br/ #AnáliseGrupal');
                     } else {
                       // console.log(data)
                       const error = data.response.data.error
