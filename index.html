@@ -219,8 +219,8 @@
       };
 
       const MAX_RETRIES = 3;
-      const API_DOMAIN = 'https://api.analisegrupal.com.br'
-      // const API_DOMAIN = 'http://localhost:5000'
+      // const API_DOMAIN = 'https://api.analisegrupal.com.br'
+      const API_DOMAIN = 'http://localhost:5000'
 
       function shareOnWhatsApp(imageUrl, customMessage) {
           const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -232,10 +232,16 @@
           window.open(whatsappUrl, '_blank');
       }
 
-      function uploadToImgur(imageId) {
+      function uploadToImgur(index) {
         trackEvent('share', 'WhatsApp', 'Content Share Try', 1);
         gtag('share', 'WhatsApp', {'send_to': 'AW-11398970229/w499CJ7ZufMYEPX2ubsq'});
-          const imgElement = document.getElementById(imageId);
+        // Show the spinner when the upload starts
+        // spinner.style.display = 'inline-block';
+        const _tempId = 'image' + index;
+        const _spinnerId = 'spinner' + index;
+          const imgElement = document.getElementById(_tempId);
+          const spinnerElemment = document.getElementById(_spinnerId);
+          spinnerElemment.style.display = 'inline-block';
           fetch(imgElement.src)
           .then(res => res.blob())
           .then(blob => {
@@ -249,6 +255,7 @@
                   })
                   .then(response => response.json())
                   .then(data => {
+                    spinnerElemment.style.display = 'none';
                     if (data.link) {
                         shareOnWhatsApp(data.link, '🚀 Descubra as estatísticas do nosso grupo do WhatsApp com esta análise! 📊🧐 Confira no https://analisegrupal.com.br/ #AnáliseGrupal [BETA]');
                     } else {
@@ -261,9 +268,11 @@
                     }
                   })
                   .catch(error => {
+                      spinnerElemment.style.display = 'none';
                       console.error('Error uploading to Imgur or sharing on WhatsApp:', error);
                   });
               }).catch(error => {
+                  spinnerElemment.style.display = 'none';
                   console.error('Invalid image for upload:', error);
               });
           });
@@ -319,6 +328,13 @@
           uploadButton.width = 50
           uploadButton.alt = 'Clique para compartilhar pelo whatsapp';
           uploadButton.style.cursor = 'pointer';
+
+          const spinner = document.createElement('img');
+          spinner.src = "img/loading_01.gif"; // Make sure the 'img/loading.gif' exists
+          spinner.alt = "Carregando...";
+          spinner.style.display = 'none'; // Initially hidden
+          spinner.id = 'spinner' + (index + 1); // Unique ID for each spinner
+          spinner.width = 50; // Set the size of the spinner as needed
 
           if (endpoint === "/whatsapp/message/topic_modeling") {
               const placeholderImg = document.createElement('img');
@@ -379,8 +395,9 @@
                   img.src = imageUrl;
                   img.onload = () => img.scrollIntoView({ behavior: 'smooth' });
 
-                  uploadButton.onclick = () => uploadToImgur(img.id);
+                  uploadButton.onclick = () => uploadToImgur((index + 1));
                   resultsDiv.insertBefore(uploadButton, img.nextSibling);
+                  resultsDiv.insertBefore(spinner, uploadButton.nextSibling);
 
                   processEndpoint(index + 1, formData);  // Process the next endpoint
               })
