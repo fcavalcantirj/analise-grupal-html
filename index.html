@@ -20,6 +20,8 @@
   <link rel="manifest" href="site.webmanifest">
   <meta name="theme-color" content="#fafafa">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lobster'>
   <style>
         * {
             margin: 0;
@@ -139,6 +141,35 @@
     footer p {
         color: #aaa;
     }
+    .content {
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      position: relative;
+      /*left: 50%;
+      top: 50%;*/
+      transform: translate(-50%, -50%);
+      padding: 1em;
+    }
+    .content .title {
+      font: 5em Lobster, cursive;
+      text-shadow: 0 2px 0 rgba(0,0,0,0.5);
+      color: #fafafa;
+      margin: -0.5em 0 0.5em 0;
+    }
+    .content canvas {
+      background: #000000;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.25);
+    }
+    canvas#canvas {
+      background-color: black;
+      display: none; /* Only show it when the game starts */
+      position: fixed; /* Fixed position makes it stay in place even when scrolling */
+      top: 50%; /* Start at 50% from the top */
+      left: 50%; /* Start at 50% from the left */
+      transform: translate(-50%, -50%); /* This will truly center the canvas */
+      z-index: 9999; /* This should be higher than any other z-index on your page */
+    }
     </style>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DTBLS7LPL"></script>
@@ -179,6 +210,7 @@
 
   <div id="analysisResults"></div>
 
+  <canvas id="canvas" width="640" height="480" style="z-index: 9999; display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);"></canvas>
 
   <script src="js/app.js"></script>
   <script>
@@ -241,13 +273,31 @@
           }
       }
 
-      function uploadToImgur(imageId, spinnerId) {
+      function showSpinner(spinnerId) {
+        console.log("showSpinner-id=[" + spinnerId + ']');
+        try { 
+          document.getElementById(spinnerId).style.display = 'block'
+        } catch (err) { 
+          console.log(err) 
+        }
+      }
+
+      function hideSpinner(spinnerId) {
+        console.log("hideSpinner-id=[" + spinnerId + ']');
+        try { 
+          document.getElementById(spinnerId).style.display = 'none'
+        } catch (err) {
+          console.log(err) 
+        }      
+      }
+
+      function uploadAndShare(imageId, spinnerId, text, analysisType, temperature, endGame) {
+        console.log(imageId)
+        console.log(spinnerId)
         trackEvent('share', 'WhatsApp', 'Content Share Try', 1);
         gtag('share', 'WhatsApp', {'send_to': 'AW-11398970229/w499CJ7ZufMYEPX2ubsq'});
-          const imgElement = document.getElementById(imageId);
-          const spinnerElemment = document.getElementById(spinnerId);
-          spinnerElemment.style.display = 'inline-block';
-          fetch(imgElement.src)
+        const imgElement = document.getElementById(imageId);
+        fetch(imgElement.src)
           .then(res => res.blob())
           .then(blob => {
               validateImage(blob).then(validBlob => {
@@ -260,11 +310,20 @@
                   })
                   .then(response => response.json())
                   .then(data => {
-                    if (spinnerId) {
-                      document.getElementById(spinnerId).style.display = 'none';
+                    if (endGame) {
+                      end_game()
                     }
-                    if (data.link) {
-                        shareOnWhatsApp(data.link, '🚀 Descubra as estatísticas do nosso grupo do WhatsApp com esta análise! 📊🧐 Confira no https://analisegrupal.com.br/ #AnáliseGrupal');
+                    let _text;
+                    if(text && analysisType && temperature) {
+                      let model = `\n\nAnálise tipo:[${analysisType}]--temperatura:[${temperature}]`
+                      _text = text
+                      _text += model
+                      _text += '\n\n\n📊🧐 Confira no https://analisegrupal.com.br/ #AnáliseGrupal'
+                    } else {
+                      _text = '🚀 Descubra as estatísticas do nosso grupo do WhatsApp com esta análise! '
+                    }
+                    if (data.link && _text) {
+                        shareOnWhatsApp(data.link, _text, endGame);
                     } else {
                       // console.log(data)
                       const error = data.response.data.error
@@ -275,14 +334,14 @@
                     }
                   })
                   .catch(error => {
-                    if (spinnerId) {
-                      document.getElementById(spinnerId).style.display = 'none';
+                    if (endGame) {
+                      end_game()
                     }
-                      console.error('Error uploading to Imgur or sharing on WhatsApp:', error);
+                    console.error('Error uploading to Imgur or sharing on WhatsApp:', error);
                   });
               }).catch(error => {
-                  if (spinnerId) {
-                    document.getElementById(spinnerId).style.display = 'none';
+                  if (endGame) {
+                    end_game()
                   }
                   console.error('Invalid image for upload:', error);
               });
@@ -301,7 +360,6 @@
 
       function fetchData(endpoint, formData, retries = 0) {
             return fetch(API_DOMAIN + endpoint, {
-          // return fetch('http://localhost:5000' + endpoint, {
               method: 'POST',
               body: formData
           })
@@ -319,9 +377,169 @@
           });
       }
 
+      function createButtonSet(imageSrc, text, index, type) {
+        const container = document.createElement('div');
+        container.style.display = 'flex';
+        container.style.alignItems = 'center';
+        container.style.flexDirection = 'column';
+        container.style.padding = '20px';
+
+        // If type is 'whatsapp', create the WhatsApp share button
+        if (type === 'whatsapp') {
+            const button = document.createElement('img');
+            button.src = imageSrc;
+            button.width = 50;
+            button.alt = text;
+            button.style.cursor = 'pointer';
+            container.appendChild(button);
+
+            const buttonText = document.createElement('span');
+            buttonText.innerText = text;
+            container.appendChild(buttonText);
+
+            const spinner = document.createElement('img');
+            spinner.src = "img/loading_01.gif";
+            spinner.alt = "Carregando...";
+            spinner.style.display = 'none';
+            spinner.id = `whatsapp-spinner-${index+1}`;
+            spinner.width = 30;
+            container.appendChild(spinner);
+
+            button.onclick = () => {
+                showSpinner(spinner.id);
+                uploadAndShare('image' + (index+1), spinner.id);
+            };
+        } 
+        // Otherwise, if type is 'analysis', create the analysis options form
+        else if (type === 'analysis') {
+            // Analysis options will be a form with radio buttons and a slider
+            const form = document.createElement('form');
+            form.id = `analysis-options-${index}`;
+            form.style.display = 'flex';
+            form.style.flexDirection = 'column';
+            form.style.alignItems = 'flex-start';
+            form.style.marginTop = '10px';
+
+            // Radio buttons for analysis type
+            const types = ['técnica', 'descontraída', 'zoeira'];
+            types.forEach((type, idx) => {
+                const label = document.createElement('label');
+                const radio = document.createElement('input');
+                radio.type = 'radio';
+                radio.name = `analysisType-${index}`;
+                radio.value = type;
+                radio.id = `analysisType-${type}-${index}`;
+                if (idx === 0) radio.checked = true; // Default to first option
+                label.appendChild(radio);
+                label.appendChild(document.createTextNode(type.charAt(0).toUpperCase() + type.slice(1)));
+                form.appendChild(label);
+            });
+
+            // Slider for randomness
+            const sliderLabel = document.createElement('label');
+            sliderLabel.innerText = 'Aleatoriedade:';
+            const slider = document.createElement('input');
+            slider.type = 'range';
+            slider.min = '0';
+            slider.max = '1';
+            slider.step = '0.1';
+            slider.value = '0.1'; // Default value
+            slider.id = `randomness-slider-${index}`;
+            sliderLabel.appendChild(slider);
+            form.appendChild(sliderLabel);
+
+            // Button to trigger the analysis
+            const analyzeButton = document.createElement('button');
+            analyzeButton.type = 'button'; // Prevent form submission
+            analyzeButton.innerText = 'Analise e compartilhe';
+            analyzeButton.onclick = () => {
+                const selectedType = document.querySelector(`input[name="analysisType-${index}"]:checked`).value;
+                const randomnessValue = slider.value;
+                console.log('Start analysis with options:', selectedType, randomnessValue);
+                analyzeAndShare('image' + (index + 1), selectedType, randomnessValue, `analysis-spinner-${index+1}`);
+            };
+            form.appendChild(analyzeButton);
+
+            container.appendChild(form);
+        }
+
+        return { container };
+    }
+
+
+    // Helper function to create radio button
+    function createRadioButton(id, value, isChecked) {
+        const radioInput = document.createElement('input');
+        radioInput.type = 'radio';
+        radioInput.id = id;
+        radioInput.name = `analysisType-${id.split('-')[2]}`;
+        radioInput.value = value;
+        radioInput.checked = isChecked;
+
+        const radioLabel = document.createElement('label');
+        radioLabel.htmlFor = id;
+        radioLabel.innerText = value.charAt(0).toUpperCase() + value.slice(1); // Capitalize the first letter
+
+        radioLabel.appendChild(radioInput);
+
+        return { label: radioLabel };
+    }
+
+    async function analyzeAndShare(imageId, analysisType, temperature, spinnerId) {
+      trackEvent('clicked_analyzeAndShare', 'Form', 'Clicked analyseAndShare', 1);
+      const imageNumber = parseInt(imageId.replace(/[^\d]/g, ''), 10);
+      if(imageNumber > 1) {
+        alert('Não implementado, confira novamente amanhã');
+        return;
+      }
+      const formData = new FormData(document.getElementById('uploadForm'));
+      try {
+        start_game()
+        const canvasGameContainer = document.getElementById('canvas');
+        canvasGameContainer.style.display = 'block';
+        const temp = parseFloat(temperature)
+
+        // Append the analysis type and temperature to the formData
+        formData.append('data', JSON.stringify({
+          type: analysisType,
+          temperature: temp
+        }));
+
+        let _url;
+
+        if (imageNumber === 1) {
+          _url = 'https://api.analisegrupal.com.br/whatsapp/message/avg_sentiment_per_person/analyse'
+        }
+
+        const response = await fetch(_url, {
+          method: 'POST',
+          body: formData
+        });
+
+        // Check if the request was successful
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        // Parse the response as JSON
+        const result = await response.json();
+
+        // Log the result or do something with it
+        // console.log(result);
+
+        uploadAndShare(imageId, spinnerId, result, analysisType, temperature, true)
+
+      } catch (error) {
+        console.error('Error during the API call:', error);
+      } finally {
+        // doSomething???
+      }
+    }
+
+
       function processEndpoint(index, formData) {
           if (index >= endpoints.length) {
-              return;  // All endpoints processed
+              return; // All endpoints processed
           }
 
           const endpoint = endpoints[index];
@@ -334,30 +552,20 @@
           title.innerText = titleText;
           resultsDiv.appendChild(title);
 
-          // Create a flex container for the share button and spinner
-          const buttonSpinnerContainer = document.createElement('div');
-          buttonSpinnerContainer.style.display = 'flex';
-          buttonSpinnerContainer.style.alignItems = 'center';
+          // Create a container for each set of buttons and their respective spinner and text
+          const buttonSetContainer = document.createElement('div');
+          buttonSetContainer.style.display = 'flex';
+          buttonSetContainer.style.alignItems = 'center';
+          buttonSetContainer.style.justifyContent = 'space-between';
+          buttonSetContainer.style.marginBottom = '10px'; // Space between button sets
 
-          // Create the upload button
-          const uploadButton = document.createElement('img');
-          uploadButton.src = 'img/share_whatsapp.png';
-          uploadButton.width = 50;
-          uploadButton.alt = 'Compartilhar pelo WhatsApp';
-          uploadButton.style.cursor = 'pointer';
-          uploadButton.style.marginRight = '10px'; // Space between button and spinner
+          // Create the WhatsApp share button set
+          const whatsappButtonSet = createButtonSet('img/share_whatsapp.png', 'Compartilhe', index, 'whatsapp');
+          buttonSetContainer.appendChild(whatsappButtonSet.container);
 
-          // Create the spinner and initially hide it
-          const spinner = document.createElement('img');
-          spinner.src = "img/loading_01.gif"; // Path to your loading gif
-          spinner.alt = "Carregando...";
-          spinner.style.display = 'none'; // Initially hidden
-          spinner.id = 'spinner' + (index + 1); // Unique ID for each spinner
-          spinner.width = 30; // Spinner size
-
-          // Add the upload button and spinner to the container
-          buttonSpinnerContainer.appendChild(uploadButton);
-          buttonSpinnerContainer.appendChild(spinner);
+          // Create the analysis and share button set
+          const analysisButtonSet = createButtonSet('img/share_whatsapp.png', 'Analise e Compartilhe', index, 'analysis');
+          buttonSetContainer.appendChild(analysisButtonSet.container);
 
           if (endpoint === "/whatsapp/message/topic_modeling") {
               const placeholderImg = document.createElement('img');
@@ -418,17 +626,8 @@
                   img.src = imageUrl;
                   img.onload = () => img.scrollIntoView({ behavior: 'smooth' });
 
-                  // uploadButton.onclick = () => uploadToImgur((index + 1));
-                    // Adjust the following lines to work with the new layout
-                  uploadButton.onclick = () => {
-                      // Show spinner when upload starts
-                      document.getElementById(spinner.id).style.display = 'block';
-                      uploadToImgur('image' + (index + 1), spinner.id);
-                  };
-                  // resultsDiv.insertBefore(uploadButton, img.nextSibling);
-                  // resultsDiv.insertBefore(spinner, uploadButton.nextSibling);
-                  // resultsDiv.insertBefore(buttonContainer, img.nextSibling);
-                  resultsDiv.appendChild(buttonSpinnerContainer);
+                  // Append the button sets to the resultsDiv
+                  resultsDiv.appendChild(buttonSetContainer);
 
                   processEndpoint(index + 1, formData);  // Process the next endpoint
               })
@@ -454,6 +653,125 @@
           processEndpoint(0, formData);  // Start processing from the first endpoint
 
           return false;  // Prevent actual form submission
+      }
+
+      var canvas = document.getElementById("canvas");
+      var ctx = canvas.getContext("2d");
+      var dir, score, snake, food;
+      var speed = 222;
+      var speedSnake = 20;
+
+      document.addEventListener("keydown", function(e) {
+        var keyCode = e.keyCode;
+        if (keyCode == 37 && dir != "right") {
+          dir = "left";
+        }
+        if (keyCode == 38 && dir != "down") {
+          dir = "up";
+        }
+        if (keyCode == 39 && dir != "left") {
+          dir = "right";
+        }
+        if (keyCode == 40 && dir != "up") {
+          dir = "down";
+        }
+      });
+
+      function start_game() {
+        setInterval(draw, speed);
+        requestAnimationFrame(init);
+        var canvasGameContainer = document.getElementById('canvas');
+        canvasGameContainer.style.display = 'block';
+      }
+
+      function end_game() {
+        var canvasGameContainer = document.getElementById('canvas');
+        canvasGameContainer.style.display = 'none';
+      }
+
+      function init() {
+        dir = "right";
+        score = 0;
+        snake = [{ x: 40, y: 40 }, { x: 60, y: 40 }, { x: 80, y: 40 }];
+        createFood();
+      }
+
+      function add() {
+        var lastsnake = snake[snake.length - 1];
+
+        if (dir == "right") {
+          snake.push({ x: lastsnake.x + speedSnake, y: lastsnake.y });
+        }
+        if (dir == "down") {
+          snake.push({ x: lastsnake.x, y: lastsnake.y + speedSnake });
+        }
+        if (dir == "left") {
+          snake.push({ x: lastsnake.x - speedSnake, y: lastsnake.y });
+        }
+        if (dir == "up") {
+          snake.push({ x: lastsnake.x, y: lastsnake.y - speedSnake });
+        }
+      }
+
+      function createFood() {
+        food = {
+          x: Math.floor(Math.random() * 25),
+          y: Math.floor(Math.random() * 25)
+        };
+        for (var i = 0; i < snake.length; i++) {
+          var snake2 = snake[i];
+          if (food.x == snake2.x && food.y == snake2.y) {
+            createFood();
+          }
+        }
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, 888, 555);
+        snake.shift();
+        add();
+
+        var lastsnake = snake[snake.length - 1];
+        
+        if (lastsnake.x == food.x * 20 && lastsnake.y == food.y * 20) {
+          score += 5;
+          add();
+          createFood();
+        }
+
+        for (i = 0; i < snake.length; i++) {
+          snake2 = snake[i];
+          if (i == snake.length - 1) {
+            ctx.fillStyle = "#83a41a";
+          } else {
+            ctx.fillStyle = "#b4ce3a";
+          }
+          if (snake2.x > 640) {
+            snake2.x = 0;
+          }
+          if (snake2.x < 0) {
+            snake2.x = 640;
+          }
+          if (snake2.y > 480) {
+            snake2.y = 0;
+          }
+          if (snake2.y < 0) {
+            snake2.y = 480;
+          }
+
+          if (
+            snake2.x == lastsnake.x &&
+            snake2.y == lastsnake.y &&
+            i < snake.length - 2
+          ) {
+            alert("Fim de jogo, sua pontuação foi: " + score);
+            init();
+          }
+
+          ctx.fillRect(snake2.x, snake2.y, 19, 19);
+        }
+        ctx.fillRect(food.x * 17, food.y * 20, 19, 19);
+        ctx.fillText("Pontos: " + score, 10, 20);
       }
   </script>
   <a href="https://github.com/fcavalcantirj/analise-grupal-html" style="position: absolute; top: 0; right: 0; z-index: 100;">
