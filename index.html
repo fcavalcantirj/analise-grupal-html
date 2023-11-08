@@ -661,6 +661,50 @@
       var speed = 222;
       var speedSnake = 20;
 
+      // Touch control setup
+      var touchZone = {
+        left: { x: 0, y: canvas.height / 2, width: canvas.width / 4, height: canvas.height / 4 },
+        up: { x: canvas.width / 4, y: 0, width: canvas.width / 2, height: canvas.height / 4 },
+        right: { x: canvas.width - canvas.width / 4, y: canvas.height / 2, width: canvas.width / 4, height: canvas.height / 4 },
+        down: { x: canvas.width / 4, y: canvas.height - canvas.height / 4, width: canvas.width / 2, height: canvas.height / 4 }
+      };
+
+      function getTouchPos(canvasDom, touchEvent) {
+        var rect = canvasDom.getBoundingClientRect();
+        return {
+          x: touchEvent.touches[0].clientX - rect.left,
+          y: touchEvent.touches[0].clientY - rect.top
+        };
+      }
+
+      function handleTouch(e) {
+        var touchPos = getTouchPos(canvas, e);
+        for (var direction in touchZone) {
+          var zone = touchZone[direction];
+          if (
+            touchPos.x > zone.x &&
+            touchPos.x < zone.x + zone.width &&
+            touchPos.y > zone.y &&
+            touchPos.y < zone.y + zone.height
+          ) {
+            if (direction == "left" && dir != "right") {
+              dir = "left";
+            } else if (direction == "up" && dir != "down") {
+              dir = "up";
+            } else if (direction == "right" && dir != "left") {
+              dir = "right";
+            } else if (direction == "down" && dir != "up") {
+              dir = "down";
+            }
+            break;
+          }
+        }
+        e.preventDefault(); // Prevent scrolling when touching the canvas
+      }
+
+      canvas.addEventListener("touchstart", handleTouch, false);
+
+      // Original keyboard controls
       document.addEventListener("keydown", function(e) {
         var keyCode = e.keyCode;
         if (keyCode == 37 && dir != "right") {
@@ -677,9 +721,9 @@
         }
       });
 
+      setInterval(draw, speed);
+
       function start_game() {
-        setInterval(draw, speed);
-        requestAnimationFrame(init);
         var canvasGameContainer = document.getElementById('canvas');
         canvasGameContainer.style.display = 'block';
       }
@@ -773,6 +817,7 @@
         ctx.fillRect(food.x * 17, food.y * 20, 19, 19);
         ctx.fillText("Pontos: " + score, 10, 20);
       }
+      requestAnimationFrame(init);
   </script>
   <a href="https://github.com/fcavalcantirj/analise-grupal-html" style="position: absolute; top: 0; right: 0; z-index: 100;">
     <img decoding="async" width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_orange_ff7600.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" loading="lazy" data-recalc-dims="1">
