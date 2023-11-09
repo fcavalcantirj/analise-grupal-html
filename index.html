@@ -97,21 +97,17 @@
       }
 
       input[type="submit"] {
-/*          background-color: #4CAF50;*/
           color: #FFF;
           padding: 0.5rem 1rem;
           border: none;
           border-radius: 4px;
           cursor: pointer;
-/*          transition: background-color 0.3s ease;*/
 
           background-color: #008cba; /* More modern button color */
           transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
       }
 
       input[type="submit"]:hover {
-/*          background-color: #45a049;*/
-
           background-color: #005f6b; /* Darker shade on hover */
           transform: translateY(-2px); /* Slight lift effect */
       }
@@ -146,8 +142,6 @@
       flex-flow: column;
       align-items: center;
       position: relative;
-      /*left: 50%;
-      top: 50%;*/
       transform: translate(-50%, -50%);
       padding: 1em;
     }
@@ -202,7 +196,7 @@
   <form id="uploadForm" enctype="multipart/form-data" onsubmit="return submitForm();">
       <span>Clique <a href="https://tecnoblog.net/responde/whatsapp-salvar-historico-conversa/" target="_blank">aqui</a> para aprender a exportar o chat</span>
       <label for="file">Faça upload de um chat do whatsApp:</label>
-      <input type="file" name="file" required id="file">
+      <input type="file" name="file" required id="file" accept=".txt,.zip">
       <input type="submit" value="Carregar e Analisar">
       <span style="margin-top: 2rem;">obs: <b>nenhum</b> dado é armazenado!!!</span>
       <span>Não entendi nada!!! Clique <a href="about.html" onclick="trackEvent('about', 'AnaliseGrupal', 'about_clicked', 1);">aqui</a></span>
@@ -289,6 +283,14 @@
         } catch (err) {
           console.log(err) 
         }      
+      }
+
+      function enableAllAnalyzeButtons() {
+          for (let i = 1; ; i++) {
+              const analyzeButton = document.getElementById(`analyze${i}`);
+              if (!analyzeButton) break; // If the button doesn't exist, stop the loop
+              analyzeButton.disabled = false;
+          }
       }
 
       function uploadAndShare(imageId, spinnerId, text, analysisType, temperature, endGame) {
@@ -450,8 +452,10 @@
 
             // Button to trigger the analysis
             const analyzeButton = document.createElement('button');
+            analyzeButton.id = `analyze${index}`
             analyzeButton.type = 'button'; // Prevent form submission
-            analyzeButton.innerText = 'Analise e compartilhe';
+            analyzeButton.innerText = text;
+            analyzeButton.disabled = true
             analyzeButton.onclick = () => {
                 const selectedType = document.querySelector(`input[name="analysisType-${index}"]:checked`).value;
                 const randomnessValue = slider.value;
@@ -539,7 +543,8 @@
 
       function processEndpoint(index, formData) {
           if (index >= endpoints.length) {
-              return; // All endpoints processed
+            enableAllAnalyzeButtons();
+            return; // All endpoints processed
           }
 
           const endpoint = endpoints[index];
@@ -642,17 +647,34 @@
       }
 
       function submitForm() {
-          var formData = new FormData(document.getElementById('uploadForm'));
-          const resultsDiv = document.getElementById('analysisResults');
+          var fileInput = document.getElementById('file');
+          var file = fileInput.files[0];
+          var resultsDiv = document.getElementById('analysisResults');
           resultsDiv.innerHTML = "";  // Clear previous results
+
+          // Check if the file extension is .txt or .zip
+          var validExtensions = /(\.txt|\.zip)$/i;
+          if (!validExtensions.exec(file.name)) {
+              alert('Tipo de arquivo inválido. Faça upload de um arquivo .txt ou .zip.');
+              return false;  // Stop the form submission
+          }
+
+          var formData = new FormData(document.getElementById('uploadForm'));
 
           trackEvent('submit', 'Form', 'Chat Upload', 1);
           gtag('submit', 'Form', {'send_to': 'AW-11398970229/w499CJ7ZufMYEPX2ubsq'});
-          gtag('event', 'conversion', {'send_to': 'AW-11398970229/xvhrCJKA4fMYEPX2ubsq'})
+          gtag('event', 'conversion', {'send_to': 'AW-11398970229/xvhrCJKA4fMYEPX2ubsq'});
 
           processEndpoint(0, formData);  // Start processing from the first endpoint
 
           return false;  // Prevent actual form submission
+      }
+
+      function prepareForAnalysis() {
+        let gallery = $('.gallery a').simpleLightbox();
+        gallery.on('show.simplelightbox', function () {
+          // do something…
+        });
       }
 
       var canvas = document.getElementById("canvas");
