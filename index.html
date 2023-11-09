@@ -286,7 +286,7 @@
       }
 
       function enableAllAnalyzeButtons() {
-          for (let i = 1; ; i++) {
+          for (let i = 0; ; i++) {
               const analyzeButton = document.getElementById(`analyze${i}`);
               if (!analyzeButton) break; // If the button doesn't exist, stop the loop
               analyzeButton.disabled = false;
