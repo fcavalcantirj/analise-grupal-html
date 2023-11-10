@@ -2,7 +2,6 @@ const SNAKE_GAME_URL = 'https://pkief.com/Snake/'
 const INVADERS_GAME_URL = 'https://susam.net/invaders.html'
 const TETHER_GAME_URL = 'https://tether.rayhanadev.repl.co/'
 const JOHNNY_CASTAWAY_GIF_ONE_URL = 'https://i.imgur.com/ZN9qpcc.gif'
-const THE_DUDE_BROW = 'https://analisegrupal.com.br/img/thedude.gif'
 
 const endpoints = [
   '/whatsapp/message/avg_sentiment_per_person',
@@ -626,7 +625,7 @@ document.addEventListener('keypress', (e) => {
 });
 
 function showCastawayGif() {
-  openFullscreenGif(THE_DUDE_BROW)
+  openFullscreenGif('https://analisegrupal.com.br/img/thedude.gif')
 }
 
 window.shareOnWhatsApp = shareOnWhatsApp
