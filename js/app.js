@@ -47,8 +47,8 @@ const endpointTitles = {
 };
 
 const MAX_RETRIES = 2;
-// const API_DOMAIN = 'https://api.analisegrupal.com.br'
-const API_DOMAIN = 'http://localhost:5000'
+const API_DOMAIN = 'https://api.analisegrupal.com.br'
+// const API_DOMAIN = 'http://localhost:5000'
 
 function shareOnWhatsApp(imageUrl, customMessage) {
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
