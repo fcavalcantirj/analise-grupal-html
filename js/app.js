@@ -1,6 +1,11 @@
 const SNAKE_GAME_URL = 'https://pkief.com/Snake/'
 const INVADERS_GAME_URL = 'https://susam.net/invaders.html'
 const TETHER_GAME_URL = 'https://tether.rayhanadev.repl.co/'
+const SPACECRAFT_GAME_URL = 'https://js13kgames.com/games/spacecraft/index.html'
+const PATH_TO_GLORY_GAME_URL = 'https://js13kgames.com/games/path-to-glory/index.html'
+const MERLIN_VS_ALFONSO_GAME_URL = 'https://js13kgames.com/games/merlin-vs-alfonso/index.html'
+const CASUAL_CRUSADE_GAME_URL = 'https://js13kgames.com/games/casual-crusade/index.html'
+
 const JOHNNY_CASTAWAY_GIF_ONE_URL = 'https://i.imgur.com/ZN9qpcc.gif'
 
 const endpoints = [
@@ -577,6 +582,18 @@ function submitChoice() {
     case 'castaway':
       openFullscreenGif(JOHNNY_CASTAWAY_GIF_ONE_URL)
       break;
+    case 'spacecraft':
+      openIframe(SPACECRAFT_GAME_URL)
+      break;
+    case 'pathtoglory':
+      openIframe(PATH_TO_GLORY_GAME_URL)
+      break;
+    case 'merlinvsalfonso':
+      openIframe(MERLIN_VS_ALFONSO_GAME_URL)
+      break;
+    case 'casualcrusade':
+      openIframe(CASUAL_CRUSADE_GAME_URL)
+      break;
     default:
       console.log('No valid option was selected.');
       break;
@@ -607,7 +624,7 @@ document.addEventListener('keydown', (e) => {
 function activateEasterEgg() {
   // You can call any function here, such as opening a modal with a game
   console.log('Easter egg activated!');
-  openIframe(SNAKE_GAME_URL)
+  openIframe(MERLIN_VS_ALFONSO_GAME_URL)
   // For example: openGame('snake'); // This would be a function to start the Snake game
 }
 
