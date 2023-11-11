@@ -47,8 +47,8 @@ const endpointTitles = {
 };
 
 const MAX_RETRIES = 2;
-const API_DOMAIN = 'https://api.analisegrupal.com.br'
-// const API_DOMAIN = 'http://localhost:5000'
+// const API_DOMAIN = 'https://api.analisegrupal.com.br'
+const API_DOMAIN = 'http://localhost:5000'
 
 function shareOnWhatsApp(imageUrl, customMessage) {
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -68,20 +68,20 @@ function shareOnWhatsApp(imageUrl, customMessage) {
 }
 
 function showSpinner(spinnerId) {
-	console.log("showSpinner-id=[" + spinnerId + ']');
+	// console.log("showSpinner-id=[" + spinnerId + ']');
 	try { 
 	  document.getElementById(spinnerId).style.display = 'block'
 	} catch (err) { 
-	  console.log(err) 
+	  // console.log(err) 
 	}
 }
 
 function hideSpinner(spinnerId) {
-	console.log("hideSpinner-id=[" + spinnerId + ']');
+	// console.log("hideSpinner-id=[" + spinnerId + ']');
 	try { 
 	  document.getElementById(spinnerId).style.display = 'none'
 	} catch (err) {
-	  console.log(err) 
+	  // console.log(err) 
 	}      
 }
 
