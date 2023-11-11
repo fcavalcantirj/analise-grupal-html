@@ -599,8 +599,8 @@ function submitChoice() {
       openIframe(TETHER_GAME_URL)
       break;
     case 'randomgif':
-      const randomGifUrl = gifUrls[Math.floor(Math.random() * gifUrls.length)];
-      openFullscreenGif(randomGifUrl)
+      // const randomGifUrl = gifUrls[Math.floor(Math.random() * gifUrls.length)];
+      openFullscreenGif(JOHNNY_CASTAWAY_GIF_ONE_URL)
       break;
     case 'spacecraft':
       openIframe(SPACECRAFT_GAME_URL)
