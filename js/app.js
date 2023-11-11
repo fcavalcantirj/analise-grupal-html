@@ -10,7 +10,6 @@ const CASUAL_CRUSADE_GAME_URL = 'https://js13kgames.com/games/casual-crusade/ind
 const gifUrls = [
 'https://i.imgur.com/ZN9qpcc.gif', // JOHNNY_CASTAWAY_GIF_ONE_URL
 'https://i.pinimg.com/originals/1b/a9/2c/1ba92cf43a824dc14f526925113d58cd.gif', // TOKYO_NIGHT_URL
-'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/1edbd95e-9816-4b19-955d-481544161be0/d6fa2mw-f289526f-f583-42b2-a14c-5f8307b92282.gif', // SURREAL_GEISHA
 'https://pa1.aminoapps.com/6742/eac3ed1cfab9a952d86e54552e6574ca0eb1b9ad_hq.gif', // TOTORO_RAIN
 'https://steamuserimages-a.akamaihd.net/ugc/91604727451542695/F17B21C4ED208812F8DD4369F7021B640893258B/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false', // FULL_THROTTLE_MOTORCYCLE
 'https://miro.medium.com/v2/resize:fit:1400/1*9Cv-HmxcZyEk75OXcIlo8g.gif' // FULL_THROTTLE_GAMEPLAY
@@ -18,7 +17,6 @@ const gifUrls = [
 
 const JOHNNY_CASTAWAY_GIF_ONE_URL = 'https://i.imgur.com/ZN9qpcc.gif'
 const TOKYO_NIGHT_URL = 'https://i.pinimg.com/originals/1b/a9/2c/1ba92cf43a824dc14f526925113d58cd.gif'
-const SURREAL_GEISHA = 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/1edbd95e-9816-4b19-955d-481544161be0/d6fa2mw-f289526f-f583-42b2-a14c-5f8307b92282.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzFlZGJkOTVlLTk4MTYtNGIxOS05NTVkLTQ4MTU0NDE2MWJlMFwvZDZmYTJtdy1mMjg5NTI2Zi1mNTgzLTQyYjItYTE0Yy01ZjgzMDdiOTIyODIuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.0HjhIOjL-Bm7qmgfm6tJMh62f_2DLf-03L9AajlRsjg'
 const TOTORO_RAIN = 'https://pa1.aminoapps.com/6742/eac3ed1cfab9a952d86e54552e6574ca0eb1b9ad_hq.gif'
 const FULL_THROTTLE_MOTORCYCLE = 'https://steamuserimages-a.akamaihd.net/ugc/91604727451542695/F17B21C4ED208812F8DD4369F7021B640893258B/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false'
 const FULL_THROTTLE_GAMEPLAY = 'https://miro.medium.com/v2/resize:fit:1400/1*9Cv-HmxcZyEk75OXcIlo8g.gif'
