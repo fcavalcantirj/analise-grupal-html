@@ -94,10 +94,11 @@ function enableAllAnalyzeButtons() {
 }
 
 function uploadAndShare(imageId, spinnerId, text, analysisType, temperature, endGame) {
-	console.log(imageId)
-	console.log(spinnerId)
+	// console.log(imageId)
+	// console.log(spinnerId)
 	trackEvent('share', 'WhatsApp', 'Content Share Try', 1);
 	gtag('share', 'WhatsApp', {'send_to': 'AW-11398970229/w499CJ7ZufMYEPX2ubsq'});
+	showSpinner(spinnerId);
 	const imgElement = document.getElementById(imageId);
 	fetch(imgElement.src)
 	  .then(res => res.blob())
@@ -112,6 +113,7 @@ function uploadAndShare(imageId, spinnerId, text, analysisType, temperature, end
 	          })
 	          .then(response => response.json())
 	          .then(data => {
+	          	hideSpinner(spinnerId)
 	            if (endGame) {
 	              closeIframe()
 	              closeFullscreenGif()
@@ -129,6 +131,7 @@ function uploadAndShare(imageId, spinnerId, text, analysisType, temperature, end
 	                shareOnWhatsApp(data.link, _text, endGame);
 	            } else {
 	              // console.log(data)
+	              hideSpinner(spinnerId)
 	              const error = data.response.data.error
 	              if(error) {
 	                alert(error)
@@ -137,6 +140,7 @@ function uploadAndShare(imageId, spinnerId, text, analysisType, temperature, end
 	            }
 	          })
 	          .catch(error => {
+	          	hideSpinner(spinnerId)
 	            if (endGame) {
 	              closeIframe()
 	              closeFullscreenGif()
@@ -144,6 +148,7 @@ function uploadAndShare(imageId, spinnerId, text, analysisType, temperature, end
 	            console.error('Error uploading to Imgur or sharing on WhatsApp:', error);
 	          });
 	      }).catch(error => {
+	      	  hideSpinner(spinnerId)
 	          if (endGame) {
 	           	closeIframe()
 	            closeFullscreenGif()
@@ -211,7 +216,6 @@ function createButtonSet(imageSrc, text, index, type) {
 	    container.appendChild(spinner);
 
 	    button.onclick = () => {
-	        showSpinner(spinner.id);
 	        uploadAndShare('image' + (index+1), spinner.id);
 	    };
 	} 
