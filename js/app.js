@@ -6,7 +6,26 @@ const PATH_TO_GLORY_GAME_URL = 'https://js13kgames.com/games/path-to-glory/index
 const MERLIN_VS_ALFONSO_GAME_URL = 'https://js13kgames.com/games/merlin-vs-alfonso/index.html'
 const CASUAL_CRUSADE_GAME_URL = 'https://js13kgames.com/games/casual-crusade/index.html'
 
+
+const gifUrls = [
+'https://i.imgur.com/ZN9qpcc.gif', // JOHNNY_CASTAWAY_GIF_ONE_URL
+'https://i.pinimg.com/originals/1b/a9/2c/1ba92cf43a824dc14f526925113d58cd.gif', // TOKYO_NIGHT_URL
+'http://www.artpie.co.uk/wp-content/uploads/2016/10/Salvador-Dali-_-e.gif', // DALI_WRIST_TIME
+'http://www.artpie.co.uk/wp-content/uploads/2016/10/Salvador-Dali-_-b.gif', // DALI_DRIPING_CLOCK
+'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/1edbd95e-9816-4b19-955d-481544161be0/d6fa2mw-f289526f-f583-42b2-a14c-5f8307b92282.gif', // SURREAL_GEISHA
+'https://pa1.aminoapps.com/6742/eac3ed1cfab9a952d86e54552e6574ca0eb1b9ad_hq.gif', // TOTORO_RAIN
+'https://steamuserimages-a.akamaihd.net/ugc/91604727451542695/F17B21C4ED208812F8DD4369F7021B640893258B/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false', // FULL_THROTTLE_MOTORCYCLE
+'https://miro.medium.com/v2/resize:fit:1400/1*9Cv-HmxcZyEk75OXcIlo8g.gif' // FULL_THROTTLE_GAMEPLAY
+];
+
 const JOHNNY_CASTAWAY_GIF_ONE_URL = 'https://i.imgur.com/ZN9qpcc.gif'
+const TOKYO_NIGHT_URL = 'https://i.pinimg.com/originals/1b/a9/2c/1ba92cf43a824dc14f526925113d58cd.gif'
+const DALI_WRIST_TIME = 'http://www.artpie.co.uk/wp-content/uploads/2016/10/Salvador-Dali-_-e.gif'
+const DALI_DRIPING_CLOCK = 'http://www.artpie.co.uk/wp-content/uploads/2016/10/Salvador-Dali-_-b.gif'
+const SURREAL_GEISHA = 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/1edbd95e-9816-4b19-955d-481544161be0/d6fa2mw-f289526f-f583-42b2-a14c-5f8307b92282.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzFlZGJkOTVlLTk4MTYtNGIxOS05NTVkLTQ4MTU0NDE2MWJlMFwvZDZmYTJtdy1mMjg5NTI2Zi1mNTgzLTQyYjItYTE0Yy01ZjgzMDdiOTIyODIuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.0HjhIOjL-Bm7qmgfm6tJMh62f_2DLf-03L9AajlRsjg'
+const TOTORO_RAIN = 'https://pa1.aminoapps.com/6742/eac3ed1cfab9a952d86e54552e6574ca0eb1b9ad_hq.gif'
+const FULL_THROTTLE_MOTORCYCLE = 'https://steamuserimages-a.akamaihd.net/ugc/91604727451542695/F17B21C4ED208812F8DD4369F7021B640893258B/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false'
+const FULL_THROTTLE_GAMEPLAY = 'https://miro.medium.com/v2/resize:fit:1400/1*9Cv-HmxcZyEk75OXcIlo8g.gif'
 
 const endpoints = [
   '/whatsapp/message/avg_sentiment_per_person',
@@ -526,7 +545,7 @@ function openFullscreenGif(gifUrl) {
   gif.style.maxHeight = '100%';
 
   // Add an event listener to close the modal on click
-  overlay.addEventListener('click', closeFullscreenGif);
+  //overlay.addEventListener('click', closeFullscreenGif);
 
   // Append the GIF to the overlay, and then the overlay to the body
   overlay.appendChild(gif);
@@ -585,8 +604,9 @@ function submitChoice() {
     case 'tether':
       openIframe(TETHER_GAME_URL)
       break;
-    case 'castaway':
-      openFullscreenGif(JOHNNY_CASTAWAY_GIF_ONE_URL)
+    case 'randomgif':
+      const randomGifUrl = gifUrls[Math.floor(Math.random() * gifUrls.length)];
+      openFullscreenGif(randomGifUrl)
       break;
     case 'spacecraft':
       openIframe(SPACECRAFT_GAME_URL)
@@ -640,16 +660,61 @@ const secretWord = 'brow';
 document.addEventListener('keypress', (e) => {
   typedWord += e.key;
   if (typedWord.includes(secretWord)) {
-    showCastawayGif();
+    showTheDudeGif();
     typedWord = ''; // reset the typed word
   } else if (!secretWord.startsWith(typedWord)) {
     typedWord = ''; // reset if the sequence is wrong
   }
 });
 
-function showCastawayGif() {
+function showTheDudeGif() {
   openFullscreenGif('https://analisegrupal.com.br/img/thedude.gif')
 }
+
+function addExtraOptionsIfNotMobile() {
+  // Check if the user agent is mobile
+  var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+  var extraOptionsHtml;
+  // If not mobile, add extra game options
+  if (!isMobile) {
+    // Define the extra options as HTML
+    extraOptionsHtml = `
+      <label class="option-container">
+        <input type="radio" id="spacecraft" name="game" value="spacecraft">
+        Jogar SpaceCraft
+        <span class="checkmark"></span>
+      </label>
+      <label class="option-container">
+        <input type="radio" id="pathtoglory" name="game" value="pathtoglory">
+        Jogar Path to Glory
+        <span class="checkmark"></span>
+      </label>
+      <label class="option-container">
+        <input type="radio" id="merlinvsalfonso" name="game" value="merlinvsalfonso">
+        Jogar Merlin vs Alfonso
+        <span class="checkmark"></span>
+      </label>
+      <label class="option-container">
+        <input type="radio" id="casualcrusade" name="game" value="casualcrusade">
+        Jogar Casual Crusade
+        <span class="checkmark"></span>
+      </label>
+      <button type="button" onclick="submitChoice()" class="ok-button">OK</button>
+    `;
+  } else {
+  	extraOptionsHtml = `
+  	<button type="button" onclick="submitChoice()" class="ok-button">OK</button>
+  	`
+  }
+  // Append the extra options to the form
+  var form = document.getElementById('waitingOptions');
+  form.insertAdjacentHTML('beforeend', extraOptionsHtml);
+}
+
+// Call the function after the page loads
+window.onload = addExtraOptionsIfNotMobile;
+
 
 window.shareOnWhatsApp = shareOnWhatsApp
 window.showSpinner = showSpinner
