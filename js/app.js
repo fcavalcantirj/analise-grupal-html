@@ -709,7 +709,7 @@ function addExtraOptionsIfNotMobile() {
 }
 
 // Call the function after the page loads
-window.onload = addExtraOptionsIfNotMobile;
+// window.onload = addExtraOptionsIfNotMobile;
 
 
 window.shareOnWhatsApp = shareOnWhatsApp
