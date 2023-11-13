@@ -723,9 +723,9 @@ function addExtraOptionsIfNotMobile() {
   form.insertAdjacentHTML('beforeend', extraOptionsHtml);
 }
 
-// document.addEventListener('DOMContentLoaded', function() {
-//     addExtraOptionsIfNotMobile();
-// });
+document.addEventListener('DOMContentLoaded', function() {
+    addExtraOptionsIfNotMobile();
+});
 
 // $(document).ready(function() {
 //     addExtraOptionsIfNotMobile();
@@ -757,3 +757,4 @@ window.closeFullscreenGif = closeFullscreenGif
 window.JOHNNY_CASTAWAY_GIF_ONE_URL = JOHNNY_CASTAWAY_GIF_ONE_URL
 window.showModal = showModal
 window.submitChoice = submitChoice
+window.addExtraOptionsIfNotMobile = addExtraOptionsIfNotMobile
