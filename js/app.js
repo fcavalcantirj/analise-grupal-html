@@ -672,6 +672,7 @@ function showTheDudeGif() {
 
 function addExtraOptionsIfNotMobile() {
 	console.log('addExtraOptionsIfNotMobile')
+	console.log(navigator.userAgent)
   // Check if the user agent is mobile
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
@@ -722,7 +723,7 @@ function addExtraOptionsIfNotMobile() {
   form.insertAdjacentHTML('beforeend', extraOptionsHtml);
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+window.document.addEventListener('DOMContentLoaded', function() {
     addExtraOptionsIfNotMobile();
 });
 
