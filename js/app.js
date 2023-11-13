@@ -728,12 +728,6 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addExtraOptionsIfNotMobile();
 });
 
-// $(document).ready(function() {
-//     addExtraOptionsIfNotMobile();
-// });
-
-
-
 
 window.shareOnWhatsApp = shareOnWhatsApp
 window.showSpinner = showSpinner
