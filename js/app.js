@@ -5,21 +5,25 @@ const SPACECRAFT_GAME_URL = 'https://js13kgames.com/games/spacecraft/index.html'
 const PATH_TO_GLORY_GAME_URL = 'https://js13kgames.com/games/path-to-glory/index.html'
 const MERLIN_VS_ALFONSO_GAME_URL = 'https://js13kgames.com/games/merlin-vs-alfonso/index.html'
 const CASUAL_CRUSADE_GAME_URL = 'https://js13kgames.com/games/casual-crusade/index.html'
+const PORTOLANI_GAME_URL = 'https://js13kgames.com/games/portolani/index.html'
 
 
 const gifUrls = [
 'https://i.imgur.com/ZN9qpcc.gif', // JOHNNY_CASTAWAY_GIF_ONE_URL
-'https://i.pinimg.com/originals/1b/a9/2c/1ba92cf43a824dc14f526925113d58cd.gif', // TOKYO_NIGHT_URL
-'https://pa1.aminoapps.com/6742/eac3ed1cfab9a952d86e54552e6574ca0eb1b9ad_hq.gif', // TOTORO_RAIN
-'https://steamuserimages-a.akamaihd.net/ugc/91604727451542695/F17B21C4ED208812F8DD4369F7021B640893258B/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false', // FULL_THROTTLE_MOTORCYCLE
-'https://miro.medium.com/v2/resize:fit:1400/1*9Cv-HmxcZyEk75OXcIlo8g.gif' // FULL_THROTTLE_GAMEPLAY
+'https://i.pinimg.com/originals/af/ce/bd/afcebdc9bec77452b1b41be3d5457feb.gif',
+'https://media.tenor.com/Cwbq1toybHsAAAAC/super-mario-yoshi.gif',
+'https://media.tenor.com/7xkRrMchg20AAAAM/the-simpsons-homer-simpsons.gif',
+'https://i.pinimg.com/originals/89/38/b7/8938b79001f709f4dcbc90c05e4f257b.gif',
+'https://cdn.wallpapersafari.com/63/86/E2v5jl.gif',
+'https://i.pinimg.com/originals/81/26/7d/81267dec1d4578c4a954894cf7609415.gif',
+'https://archive.smashing.media/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/ffdb6451-d866-4967-a08d-0ed95fd5d342/level1-broadway-really-never-sleeps.gif',
+'https://bolprod.com/wp-content/uploads/2022/04/CITY_1_Rocket_Animation.gif',
+'https://steamuserimages-a.akamaihd.net/ugc/1771574640614111724/B072A6538B985B0D9B647E349ED5332535AFA689/?imw=268&imh=268&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true',
+'https://qph.cf2.quoracdn.net/main-qimg-f8001519277889468908ecb3c5a5a7ca',
+'https://media.tenor.com/0txhLtfsfakAAAAC/batman-and.gif'
 ];
 
 const JOHNNY_CASTAWAY_GIF_ONE_URL = 'https://i.imgur.com/ZN9qpcc.gif'
-const TOKYO_NIGHT_URL = 'https://i.pinimg.com/originals/1b/a9/2c/1ba92cf43a824dc14f526925113d58cd.gif'
-const TOTORO_RAIN = 'https://pa1.aminoapps.com/6742/eac3ed1cfab9a952d86e54552e6574ca0eb1b9ad_hq.gif'
-const FULL_THROTTLE_MOTORCYCLE = 'https://steamuserimages-a.akamaihd.net/ugc/91604727451542695/F17B21C4ED208812F8DD4369F7021B640893258B/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false'
-const FULL_THROTTLE_GAMEPLAY = 'https://miro.medium.com/v2/resize:fit:1400/1*9Cv-HmxcZyEk75OXcIlo8g.gif'
 
 const endpoints = [
   '/whatsapp/message/avg_sentiment_per_person',
@@ -599,8 +603,9 @@ function submitChoice() {
       openIframe(TETHER_GAME_URL)
       break;
     case 'randomgif':
-      // const randomGifUrl = gifUrls[Math.floor(Math.random() * gifUrls.length)];
-      openFullscreenGif(JOHNNY_CASTAWAY_GIF_ONE_URL)
+      const randomGifUrl = gifUrls[Math.floor(Math.random() * gifUrls.length)];
+      console.log(randomGifUrl)
+      openFullscreenGif(randomGifUrl)
       break;
     case 'spacecraft':
       openIframe(SPACECRAFT_GAME_URL)
@@ -644,7 +649,7 @@ document.addEventListener('keydown', (e) => {
 function activateEasterEgg() {
   // You can call any function here, such as opening a modal with a game
   console.log('Easter egg activated!');
-  openIframe(MERLIN_VS_ALFONSO_GAME_URL)
+  openIframe(PORTOLANI_GAME_URL)
   // For example: openGame('snake'); // This would be a function to start the Snake game
 }
 
@@ -666,6 +671,7 @@ function showTheDudeGif() {
 }
 
 function addExtraOptionsIfNotMobile() {
+	console.log('addExtraOptionsIfNotMobile')
   // Check if the user agent is mobile
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
@@ -694,10 +700,20 @@ function addExtraOptionsIfNotMobile() {
         Jogar Casual Crusade
         <span class="checkmark"></span>
       </label>
+      <label class="option-container">
+        <input type="radio" id="randomgif" name="game" value="randomgif">
+        Gif aleatório
+        <span class="checkmark"></span>
+      </label>
       <button type="button" onclick="submitChoice()" class="ok-button">OK</button>
     `;
   } else {
   	extraOptionsHtml = `
+  	<label class="option-container">
+	    <input type="radio" id="randomgif" name="game" value="randomgif">
+	    Gif aleatório
+	    <span class="checkmark"></span>
+	 </label>
   	<button type="button" onclick="submitChoice()" class="ok-button">OK</button>
   	`
   }
@@ -706,8 +722,10 @@ function addExtraOptionsIfNotMobile() {
   form.insertAdjacentHTML('beforeend', extraOptionsHtml);
 }
 
-// Call the function after the page loads
-// window.onload = addExtraOptionsIfNotMobile;
+document.addEventListener('DOMContentLoaded', function() {
+    addExtraOptionsIfNotMobile();
+});
+
 
 
 window.shareOnWhatsApp = shareOnWhatsApp
