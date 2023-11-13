@@ -672,10 +672,10 @@ function showTheDudeGif() {
 
 let enteredOnce = false
 function addExtraOptionsIfNotMobile() {
-	console.log('addExtraOptionsIfNotMobile')
-	console.log(navigator.userAgent)
+	// console.log('addExtraOptionsIfNotMobile')
+	// console.log(navigator.userAgent)
 	if(enteredOnce) {
-		console.log(`enteredOnce checked. exiting`)
+		// console.log(`enteredOnce checked. exiting`)
 		return
 	}
 	enteredOnce = true
