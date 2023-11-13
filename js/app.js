@@ -723,9 +723,14 @@ function addExtraOptionsIfNotMobile() {
   form.insertAdjacentHTML('beforeend', extraOptionsHtml);
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+// document.addEventListener('DOMContentLoaded', function() {
+//     addExtraOptionsIfNotMobile();
+// });
+
+$(document).ready(function() {
     addExtraOptionsIfNotMobile();
 });
+
 
 
 
