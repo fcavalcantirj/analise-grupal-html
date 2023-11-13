@@ -727,9 +727,9 @@ function addExtraOptionsIfNotMobile() {
 //     addExtraOptionsIfNotMobile();
 // });
 
-$(document).ready(function() {
-    addExtraOptionsIfNotMobile();
-});
+// $(document).ready(function() {
+//     addExtraOptionsIfNotMobile();
+// });
 
 
 
