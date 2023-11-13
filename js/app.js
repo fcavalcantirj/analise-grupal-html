@@ -670,9 +670,15 @@ function showTheDudeGif() {
   openFullscreenGif('https://analisegrupal.com.br/img/thedude.gif')
 }
 
+let enteredOnce = false
 function addExtraOptionsIfNotMobile() {
 	console.log('addExtraOptionsIfNotMobile')
 	console.log(navigator.userAgent)
+	if(enteredOnce) {
+		console.log(`enteredOnce checked. exiting`)
+		return
+	}
+	enteredOnce = true
   // Check if the user agent is mobile
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
