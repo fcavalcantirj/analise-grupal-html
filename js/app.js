@@ -724,7 +724,8 @@ function addExtraOptionsIfNotMobile() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    addExtraOptionsIfNotMobile();
+	console.log('DOMContentLoaded')
+    window.addExtraOptionsIfNotMobile();
 });
 
 // $(document).ready(function() {
