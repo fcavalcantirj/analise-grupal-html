@@ -2,10 +2,10 @@ const SNAKE_GAME_URL = 'https://pkief.com/Snake/'
 const INVADERS_GAME_URL = 'https://susam.net/invaders.html'
 const TETHER_GAME_URL = 'https://tether.rayhanadev.repl.co/'
 const SPACECRAFT_GAME_URL = 'https://js13kgames.com/games/spacecraft/index.html'
-const PATH_TO_GLORY_GAME_URL = 'https://js13kgames.com/games/path-to-glory/index.html'
-const MERLIN_VS_ALFONSO_GAME_URL = 'https://js13kgames.com/games/merlin-vs-alfonso/index.html'
-const CASUAL_CRUSADE_GAME_URL = 'https://js13kgames.com/games/casual-crusade/index.html'
-const PORTOLANI_GAME_URL = 'https://js13kgames.com/games/portolani/index.html'
+const PATH_TO_GLORY_GAME_URL = 'https://js13kgames.com/games/path-to-glory/index.html' // mobile
+const MERLIN_VS_ALFONSO_GAME_URL = 'https://js13kgames.com/games/merlin-vs-alfonso/index.html' //mobile
+const CASUAL_CRUSADE_GAME_URL = 'https://js13kgames.com/games/casual-crusade/index.html' // mobile
+const PORTOLANI_GAME_URL = 'https://js13kgames.com/games/portolani/index.html' // mobile
 
 let lastClicked = 'form'
 
@@ -725,6 +725,21 @@ function addExtraOptionsIfNotMobile() {
     `;
   } else {
   	extraOptionsHtml = `
+  	<label class="option-container">
+        <input type="radio" id="pathtoglory" name="game" value="pathtoglory">
+        Jogar Path to Glory
+        <span class="checkmark"></span>
+      </label>
+  	<label class="option-container">
+        <input type="radio" id="merlinvsalfonso" name="game" value="merlinvsalfonso">
+        Jogar Merlin vs Alfonso
+        <span class="checkmark"></span>
+      </label>
+      <label class="option-container">
+        <input type="radio" id="casualcrusade" name="game" value="casualcrusade">
+        Jogar Casual Crusade
+        <span class="checkmark"></span>
+      </label>
   	<label class="option-container">
 	    <input type="radio" id="randomgif" name="game" value="randomgif">
 	    Gif aleatório
