@@ -7,6 +7,7 @@ const MERLIN_VS_ALFONSO_GAME_URL = 'https://js13kgames.com/games/merlin-vs-alfon
 const CASUAL_CRUSADE_GAME_URL = 'https://js13kgames.com/games/casual-crusade/index.html'
 const PORTOLANI_GAME_URL = 'https://js13kgames.com/games/portolani/index.html'
 
+let lastClicked = 'form'
 
 const gifUrls = [
 'https://i.imgur.com/ZN9qpcc.gif', // JOHNNY_CASTAWAY_GIF_ONE_URL
@@ -102,11 +103,15 @@ function hideSpinner(spinnerId) {
 	}      
 }
 
-function enableAllAnalyzeButtons() {
+function enableAllAnalyzeButtons(endGame) {
   for (let i = 0; ; i++) {
       const analyzeButton = document.getElementById(`analyze${i}`);
       if (!analyzeButton) break; // If the button doesn't exist, stop the loop
       analyzeButton.disabled = false;
+  }
+  if(endGame) {
+  	closeIframe()
+  	closeFullscreenGif()
   }
 }
 
@@ -283,8 +288,8 @@ function createButtonSet(imageSrc, text, index, type) {
 	    analyzeButton.onclick = () => {
 	        const selectedType = document.querySelector(`input[name="analysisType-${index}"]:checked`).value;
 	        const randomnessValue = slider.value;
-	        console.log('Start analysis with options:', selectedType, randomnessValue);
-	        showModal();
+	        // console.log('Start analysis with options:', selectedType, randomnessValue);
+	        showModal('analyzeAndShare');
 	        window._imageId = `image${(index+1)}`
 	        window._analysisType = selectedType
 	        window._temperature = randomnessValue
@@ -371,7 +376,7 @@ async function analyzeAndShare(imageId, analysisType, temperature, spinnerId) {
 
 function processEndpoint(index, formData) {
   if (index >= endpoints.length) {
-    enableAllAnalyzeButtons();
+    enableAllAnalyzeButtons(true);
     return; // All endpoints processed
   }
 
@@ -475,6 +480,7 @@ function processEndpoint(index, formData) {
 }
 
 function submitForm() {
+	lastClicked = 'form'
   var fileInput = document.getElementById('file');
   var file = fileInput.files[0];
   var resultsDiv = document.getElementById('analysisResults');
@@ -498,12 +504,6 @@ function submitForm() {
   return false;  // Prevent actual form submission
 }
 
-function prepareForAnalysis() {
-	let gallery = $('.gallery a').simpleLightbox();
-	gallery.on('show.simplelightbox', function () {
-	  // do something…
-	});
-}
 
 function openIframe(gameUrl) {
   var iframe = document.getElementById('gameIframe');
@@ -581,8 +581,12 @@ window.onclick = function(event) {
   }
 }
 
-function showModal() {
-  modal.style.display = "block";      
+function showModal(_lastClicked) {
+	lastClicked = _lastClicked
+  	modal.style.display = "block";
+  	if(_lastClicked === 'form') {
+  		return false; // clicked from form
+  	}
 }
 
 // When the user submits their choice
@@ -590,7 +594,8 @@ function submitChoice() {
   var selectedGame = document.querySelector('input[name="game"]:checked').value;
   modal.style.display = "none";
 
-  console.log(selectedGame)
+  // console.log(selectedGame)
+  // console.log('lastClicked=['+lastClicked+']')
 
   switch (selectedGame) {
     case 'snake':
@@ -623,7 +628,11 @@ function submitChoice() {
       console.log('No valid option was selected.');
       break;
   }
-  analyzeAndShare(_imageId, _analysisType, _temperature, _spinnerId);
+  if(lastClicked === 'form') {
+  	submitForm()
+  } else {
+  	analyzeAndShare(_imageId, _analysisType, _temperature, _spinnerId);
+  }
 }
 
 /** END MODAL STUFF **/
@@ -747,7 +756,6 @@ window.createRadioButton = createRadioButton
 window.analyzeAndShare = analyzeAndShare
 window.processEndpoint = processEndpoint
 window.submitForm = submitForm
-window.prepareForAnalysis = prepareForAnalysis
 window.openIframe = openIframe
 window.closeIframe = closeIframe
 window.SNAKE_GAME_URL = SNAKE_GAME_URL
