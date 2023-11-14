@@ -6,6 +6,7 @@ const PATH_TO_GLORY_GAME_URL = 'https://js13kgames.com/games/path-to-glory/index
 const MERLIN_VS_ALFONSO_GAME_URL = 'https://js13kgames.com/games/merlin-vs-alfonso/index.html' //mobile
 const CASUAL_CRUSADE_GAME_URL = 'https://js13kgames.com/games/casual-crusade/index.html' // mobile
 const PORTOLANI_GAME_URL = 'https://js13kgames.com/games/portolani/index.html' // mobile
+const TINY_YURTS_GAME_URL = 'https://js13kgames.com/games/tiny-yurts/index.html' // mobile
 
 let lastClicked = 'form'
 
@@ -624,6 +625,9 @@ function submitChoice() {
     case 'casualcrusade':
       openIframe(CASUAL_CRUSADE_GAME_URL)
       break;
+    case 'tinyyurts':
+      openIframe(TINY_YURTS_GAME_URL)
+      break;
     default:
       console.log('No valid option was selected.');
       break;
@@ -716,6 +720,11 @@ function addExtraOptionsIfNotMobile() {
         Jogar Casual Crusade
         <span class="checkmark"></span>
       </label>
+  	  <label class="option-container">
+        <input type="radio" id="tinyyurts" name="game" value="tinyyurts">
+        Jogar Tiny Yurts
+        <span class="checkmark"></span>
+      </label>
       <label class="option-container">
         <input type="radio" id="randomgif" name="game" value="randomgif">
         Gif aleatório
@@ -726,10 +735,15 @@ function addExtraOptionsIfNotMobile() {
   } else {
   	extraOptionsHtml = `
   	<label class="option-container">
+        <input type="radio" id="tinyyurts" name="game" value="tinyyurts">
+        Jogar Tiny Yurts
+        <span class="checkmark"></span>
+    </label>
+  	<label class="option-container">
         <input type="radio" id="pathtoglory" name="game" value="pathtoglory">
         Jogar Path to Glory
         <span class="checkmark"></span>
-      </label>
+    </label>
   	<label class="option-container">
         <input type="radio" id="merlinvsalfonso" name="game" value="merlinvsalfonso">
         Jogar Merlin vs Alfonso
