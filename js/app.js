@@ -1,12 +1,51 @@
+// const TETHER_GAME_URL = 'https://tether.rayhanadev.repl.co/'
+
 const SNAKE_GAME_URL = 'https://pkief.com/Snake/'
 const INVADERS_GAME_URL = 'https://susam.net/invaders.html'
-const TETHER_GAME_URL = 'https://tether.rayhanadev.repl.co/'
 const SPACECRAFT_GAME_URL = 'https://js13kgames.com/games/spacecraft/index.html'
 const PATH_TO_GLORY_GAME_URL = 'https://js13kgames.com/games/path-to-glory/index.html' // mobile
 const MERLIN_VS_ALFONSO_GAME_URL = 'https://js13kgames.com/games/merlin-vs-alfonso/index.html' //mobile
 const CASUAL_CRUSADE_GAME_URL = 'https://js13kgames.com/games/casual-crusade/index.html' // mobile
 const PORTOLANI_GAME_URL = 'https://js13kgames.com/games/portolani/index.html' // mobile
 const TINY_YURTS_GAME_URL = 'https://js13kgames.com/games/tiny-yurts/index.html' // mobile
+const CASTLE_SCAPE_2023_GAME_URL = 'https://js13kgames.com/games/castle-escape-2023/index.html' // mobile
+const TOWER_GAME_URL = 'https://iamkun.github.io/tower_game/' // mobile
+const NUMBER_KNIGHT = 'https://js13kgames.com/games/number-knight/index.html' // mobile
+const SAMURAI_SAM_GAME_URL = 'https://js13kgames.com/games/samurai-sam/index.html' // mobile
+const RUNEKEEPER_GAME_URL = 'https://js13kgames.com/games/runekeeper/index.html' // mobile
+const KNIGHTING_OF_SIR_ISAAC_GAME_URL = 'https://js13kgames.com/games/the-knighting-of-sr-isaac/index.html' // mobile
+const KHAN_GAME_URL = 'https://js13kgames.com/games/khan-westward-conquest/index.html' // mobile
+const BEWITHED_GAME_URL = 'https://js13kgames.com/games/bewitched/index.html' // mobile
+const BARBERS_GUILD_GAME_URL = 'https://js13kgames.com/games/13th-barbers-guild/index.html?lang=pt' // mobile
+const SLOWED_DAO_RUN_GAME_URL = 'https://js13kgames.com/games/slowed-dao-run/index.html' // mobile
+const HUGO_THE_WIZARD_GAME_URL = 'https://js13kgames.com/games/hugo-the-wizard/index.html' // mobile
+const JOURNER_TO_THE_EAST_SILK_ROAD = 'https://js13kgames.com/games/journey-to-the-east-silk-road-adventure/index.html' // mobile
+const CRYZEN_GAME_URL = 'https://cryzen.io/' // mobile
+
+const gameMap = {
+  'https://cryzen.io/': 'Cryzen',
+  'https://js13kgames.com/games/path-to-glory/index.html': 'Path to Glory',
+  'https://js13kgames.com/games/merlin-vs-alfonso/index.html': 'Merlin vs Alfonso',
+  'https://js13kgames.com/games/casual-crusade/index.html': 'Casual Crusade',
+  'https://js13kgames.com/games/portolani/index.html': 'Portolani',
+  'https://js13kgames.com/games/tiny-yurts/index.html': 'Tiny Yurts',
+  'https://js13kgames.com/games/castle-escape-2023/index.html': 'Castle Scape 2023',
+  'https://iamkun.github.io/tower_game/': 'Tower Game',
+  'https://js13kgames.com/games/number-knight/index.html': 'Number Knight',
+  'https://js13kgames.com/games/samurai-sam/index.html': 'Samurai Sam',
+  'https://js13kgames.com/games/runekeeper/index.html': 'Runekeeper',
+  'https://js13kgames.com/games/the-knighting-of-sr-isaac/index.html': 'Knighting of Sir Isaac',
+  'https://js13kgames.com/games/khan-westward-conquest/index.html': 'Khan: Westward Conquest',
+  'https://js13kgames.com/games/bewitched/index.html': 'Bewitched',
+  'https://js13kgames.com/games/13th-barbers-guild/index.html?lang=pt': 'Barbers Guild',
+  'https://js13kgames.com/games/slowed-dao-run/index.html': 'Slowed Dao Run',
+  'https://js13kgames.com/games/hugo-the-wizard/index.html': 'Hugo the Wizard',
+  'https://js13kgames.com/games/journey-to-the-east-silk-road-adventure/index.html': 'Journey to the East: Silk Road Adventure',
+  'https://pkief.com/Snake/': 'Snake',
+  'https://susam.net/invaders.html': 'Invaders',
+  'https://js13kgames.com/games/spacecraft/index.html': 'Spacecraft'
+};
+
 
 let lastClicked = 'form'
 
@@ -32,7 +71,7 @@ const endpoints = [
   '/whatsapp/message/sentiment_over_time',
   '/whatsapp/message/peak_response_time',
   '/whatsapp/message/activity_heatmap',
-  '/whatsapp/message/user_activity_over_time',
+  // '/whatsapp/message/user_activity_over_time', // not that good
   '/whatsapp/message/conversational_turns',
   '/whatsapp/message/active_days',
   '/whatsapp/message/topic_percentage',
@@ -590,52 +629,49 @@ function showModal(_lastClicked) {
   	}
 }
 
-// When the user submits their choice
+
 function submitChoice() {
-  var selectedGame = document.querySelector('input[name="game"]:checked').value;
+  // Get the selected game's URL from the select element
+  var selectedGameUrl = document.getElementById('gameSelect').value;
   modal.style.display = "none";
 
-  // console.log(selectedGame)
-  // console.log('lastClicked=['+lastClicked+']')
+  const actionMap = {
+	  [SNAKE_GAME_URL]: () => openIframe(SNAKE_GAME_URL),
+	  [INVADERS_GAME_URL]: () => openIframe(INVADERS_GAME_URL),
+	  [SPACECRAFT_GAME_URL]: () => openIframe(SPACECRAFT_GAME_URL),
+	  [PATH_TO_GLORY_GAME_URL]: () => openIframe(PATH_TO_GLORY_GAME_URL),
+	  [MERLIN_VS_ALFONSO_GAME_URL]: () => openIframe(MERLIN_VS_ALFONSO_GAME_URL),
+	  [CASUAL_CRUSADE_GAME_URL]: () => openIframe(CASUAL_CRUSADE_GAME_URL),
+	  [PORTOLANI_GAME_URL]: () => openIframe(PORTOLANI_GAME_URL),
+	  [TINY_YURTS_GAME_URL]: () => openIframe(TINY_YURTS_GAME_URL),
+	  [CASTLE_SCAPE_2023_GAME_URL]: () => openIframe(CASTLE_SCAPE_2023_GAME_URL),
+	  [TOWER_GAME_URL]: () => openIframe(TOWER_GAME_URL),
+	  [NUMBER_KNIGHT]: () => openIframe(NUMBER_KNIGHT),
+	  [SAMURAI_SAM_GAME_URL]: () => openIframe(SAMURAI_SAM_GAME_URL),
+	  [RUNEKEEPER_GAME_URL]: () => openIframe(RUNEKEEPER_GAME_URL),
+	  [KNIGHTING_OF_SIR_ISAAC_GAME_URL]: () => openIframe(KNIGHTING_OF_SIR_ISAAC_GAME_URL),
+	  [KHAN_GAME_URL]: () => openIframe(KHAN_GAME_URL),
+	  [BEWITHED_GAME_URL]: () => openIframe(BEWITHED_GAME_URL),
+	  [BARBERS_GUILD_GAME_URL]: () => openIframe(BARBERS_GUILD_GAME_URL),
+	  [SLOWED_DAO_RUN_GAME_URL]: () => openIframe(SLOWED_DAO_RUN_GAME_URL),
+	  [HUGO_THE_WIZARD_GAME_URL]: () => openIframe(HUGO_THE_WIZARD_GAME_URL),
+	  [JOURNER_TO_THE_EAST_SILK_ROAD]: () => openIframe(JOURNER_TO_THE_EAST_SILK_ROAD),
+	  [CRYZEN_GAME_URL]: () => openIframe(CRYZEN_GAME_URL),
+	  'randomgif': () => {
+	    const randomGifUrl = gifUrls[Math.floor(Math.random() * gifUrls.length)];
+	    console.log(randomGifUrl);
+	    openFullscreenGif(randomGifUrl);
+	  },
+	  'default': () => console.log('No valid option was selected.')
+};
 
-  switch (selectedGame) {
-    case 'snake':
-      openIframe(SNAKE_GAME_URL)
-      break;
-    case 'invaders':
-      openIframe(INVADERS_GAME_URL)
-      break;
-    case 'tether':
-      openIframe(TETHER_GAME_URL)
-      break;
-    case 'randomgif':
-      const randomGifUrl = gifUrls[Math.floor(Math.random() * gifUrls.length)];
-      console.log(randomGifUrl)
-      openFullscreenGif(randomGifUrl)
-      break;
-    case 'spacecraft':
-      openIframe(SPACECRAFT_GAME_URL)
-      break;
-    case 'pathtoglory':
-      openIframe(PATH_TO_GLORY_GAME_URL)
-      break;
-    case 'merlinvsalfonso':
-      openIframe(MERLIN_VS_ALFONSO_GAME_URL)
-      break;
-    case 'casualcrusade':
-      openIframe(CASUAL_CRUSADE_GAME_URL)
-      break;
-    case 'tinyyurts':
-      openIframe(TINY_YURTS_GAME_URL)
-      break;
-    default:
-      console.log('No valid option was selected.');
-      break;
-  }
-  if(lastClicked === 'form') {
-  	submitForm()
+  // Execute the function based on the selected URL, or the default case if no match is found
+  (actionMap[selectedGameUrl] || actionMap['default'])();
+
+  if (lastClicked === 'form') {
+    submitForm();
   } else {
-  	analyzeAndShare(_imageId, _analysisType, _temperature, _spinnerId);
+    analyzeAndShare(_imageId, _analysisType, _temperature, _spinnerId);
   }
 }
 
@@ -685,86 +721,29 @@ function showTheDudeGif() {
 
 let enteredOnce = false
 function addExtraOptionsIfNotMobile() {
-	// console.log('addExtraOptionsIfNotMobile')
-	// console.log(navigator.userAgent)
-	if(enteredOnce) {
-		// console.log(`enteredOnce checked. exiting`)
-		return
-	}
-	enteredOnce = true
-  // Check if the user agent is mobile
-  var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    // console.log('addExtraOptionsIfNotMobile')
+    // console.log(navigator.userAgent)
+    if (enteredOnce) {
+        // console.log(`enteredOnce checked. exiting`)
+        return;
+    }
+    enteredOnce = true;
 
-  var extraOptionsHtml;
-  // If not mobile, add extra game options
-  if (!isMobile) {
-    // Define the extra options as HTML
-    extraOptionsHtml = `
-      <label class="option-container">
-        <input type="radio" id="spacecraft" name="game" value="spacecraft">
-        Jogar SpaceCraft
-        <span class="checkmark"></span>
-      </label>
-      <label class="option-container">
-        <input type="radio" id="pathtoglory" name="game" value="pathtoglory">
-        Jogar Path to Glory
-        <span class="checkmark"></span>
-      </label>
-      <label class="option-container">
-        <input type="radio" id="merlinvsalfonso" name="game" value="merlinvsalfonso">
-        Jogar Merlin vs Alfonso
-        <span class="checkmark"></span>
-      </label>
-      <label class="option-container">
-        <input type="radio" id="casualcrusade" name="game" value="casualcrusade">
-        Jogar Casual Crusade
-        <span class="checkmark"></span>
-      </label>
-  	  <label class="option-container">
-        <input type="radio" id="tinyyurts" name="game" value="tinyyurts">
-        Jogar Tiny Yurts
-        <span class="checkmark"></span>
-      </label>
-      <label class="option-container">
-        <input type="radio" id="randomgif" name="game" value="randomgif">
-        Gif aleatório
-        <span class="checkmark"></span>
-      </label>
-      <button type="button" onclick="submitChoice()" class="ok-button">OK</button>
-    `;
-  } else {
-  	extraOptionsHtml = `
-  	<label class="option-container">
-        <input type="radio" id="tinyyurts" name="game" value="tinyyurts">
-        Jogar Tiny Yurts
-        <span class="checkmark"></span>
-    </label>
-  	<label class="option-container">
-        <input type="radio" id="pathtoglory" name="game" value="pathtoglory">
-        Jogar Path to Glory
-        <span class="checkmark"></span>
-    </label>
-  	<label class="option-container">
-        <input type="radio" id="merlinvsalfonso" name="game" value="merlinvsalfonso">
-        Jogar Merlin vs Alfonso
-        <span class="checkmark"></span>
-      </label>
-      <label class="option-container">
-        <input type="radio" id="casualcrusade" name="game" value="casualcrusade">
-        Jogar Casual Crusade
-        <span class="checkmark"></span>
-      </label>
-  	<label class="option-container">
-	    <input type="radio" id="randomgif" name="game" value="randomgif">
-	    Gif aleatório
-	    <span class="checkmark"></span>
-	 </label>
-  	<button type="button" onclick="submitChoice()" class="ok-button">OK</button>
-  	`
-  }
-  // Append the extra options to the form
-  var form = document.getElementById('waitingOptions');
-  form.insertAdjacentHTML('beforeend', extraOptionsHtml);
+    // Check if the user agent is mobile
+    var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    var extraOptionsHtml = '<select name="game" id="gameSelect">';
+    for (var url in gameMap) {
+        var gameTitle = gameMap[url];
+        extraOptionsHtml += '<option value="' + url + '">Jogar ' + gameTitle + '</option>';
+    }
+    extraOptionsHtml += '<option value="randomgif">Gif aleatório</option>'
+    extraOptionsHtml += '</select>';
+    extraOptionsHtml += '<button type="button" onclick="submitChoice()" class="ok-button">OK</button>';
+
+    // Append the extra options to the form
+    var form = document.getElementById('waitingOptions');
+    form.insertAdjacentHTML('beforeend', extraOptionsHtml);
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -789,7 +768,7 @@ window.openIframe = openIframe
 window.closeIframe = closeIframe
 window.SNAKE_GAME_URL = SNAKE_GAME_URL
 window.INVADERS_GAME_URL = INVADERS_GAME_URL
-window.TETHER_GAME_URL = TETHER_GAME_URL
+// window.TETHER_GAME_URL = TETHER_GAME_URL
 window.openFullscreenGif = openFullscreenGif
 window.closeFullscreenGif = closeFullscreenGif
 window.JOHNNY_CASTAWAY_GIF_ONE_URL = JOHNNY_CASTAWAY_GIF_ONE_URL

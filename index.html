@@ -62,7 +62,7 @@
 
   <div id="analysisResults"></div>
 
-  <iframe id="gameIframe" class="full-screen-iframe" src="" style="display: none;"></iframe>
+  <iframe id="gameIframe" class="full-screen-iframe" src="" style="display: none;" allow="fullscreen"></iframe>
   
   <!-- The Modal -->
   <div id="myModal" class="modal">
@@ -76,16 +76,7 @@
       <div class="modal-body">
         <p>Este processo pode levar cerca de um minuto. O que você gostaria de fazer enquanto espera?</p>
         <form id="waitingOptions">
-          <label class="option-container">
-            <input type="radio" id="snake" name="game" value="snake" checked="checked">
-            Jogar Snake
-            <span class="checkmark"></span>
-          </label>
-          <label class="option-container">
-            <input type="radio" id="invaders" name="game" value="invaders">
-            Jogar Invaders
-            <span class="checkmark"></span>
-          </label>
+          <!-- via JS -->
         </form>
       </div>
     </div>
