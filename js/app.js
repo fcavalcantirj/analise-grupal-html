@@ -23,9 +23,9 @@ const JOURNER_TO_THE_EAST_SILK_ROAD = 'https://js13kgames.com/games/journey-to-t
 const CRYZEN_GAME_URL = 'https://cryzen.io/' // mobile
 const THE_FIRST_HORDE_GAME_URL = 'https://js13kgames.com/games/the-first-horde/index.html' // mobile
 const ARCHERY_MASTER_GAME_URL = 'https://js13kgames.com/games/archery-master/index.html' // mobile
-const MUSAS_QUEST_GAME_URL = 'https://js13kgames.com/entries/musas-quest' // mobile
+const MUSAS_QUEST_GAME_URL = 'https://js13kgames.com/games/musas-quest/index.html' // mobile
 const MEANDERING_MEDIEVAL_MERCHANT_GAME_URL = 'https://js13kgames.com/games/meandering-medieval-merchant/index.html' // mobile
-const MOAI_ALLEY_GAME_URL = 'https://js13kgames.com/entries/moai-alley' // mobile
+const MOAI_ALLEY_GAME_URL = 'https://js13kgames.com/games/moai-alley/index.html' // mobile
 
 const gameMap = {
   'https://cryzen.io/': 'Cryzen',
@@ -51,9 +51,9 @@ const gameMap = {
   'https://js13kgames.com/games/spacecraft/index.html': 'Spacecraft',
   'https://js13kgames.com/games/the-first-horde/index.html': 'The First Horde',
   'https://js13kgames.com/games/archery-master/index.html': 'Archery Master',
-  'https://js13kgames.com/entries/musas-quest': 'Musas quest',
+  'https://js13kgames.com/games/musas-quest/index.html': 'Musas quest',
   'https://js13kgames.com/games/meandering-medieval-merchant/index.html': 'Meandering Medieval Merchant',
-  'https://js13kgames.com/entries/moai-alley': 'Moai alley'
+  'https://js13kgames.com/games/moai-alley/index.html': 'Moai alley'
 };
 
 
