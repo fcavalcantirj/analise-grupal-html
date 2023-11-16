@@ -25,6 +25,7 @@ const THE_FIRST_HORDE_GAME_URL = 'https://js13kgames.com/games/the-first-horde/i
 const ARCHERY_MASTER_GAME_URL = 'https://js13kgames.com/games/archery-master/index.html' // mobile
 const MUSAS_QUEST_GAME_URL = 'https://js13kgames.com/entries/musas-quest' // mobile
 const MEANDERING_MEDIEVAL_MERCHANT_GAME_URL = 'https://js13kgames.com/games/meandering-medieval-merchant/index.html' // mobile
+const MOAI_ALLEY_GAME_URL = 'https://js13kgames.com/entries/moai-alley' // mobile
 
 const gameMap = {
   'https://cryzen.io/': 'Cryzen',
@@ -51,7 +52,8 @@ const gameMap = {
   'https://js13kgames.com/games/the-first-horde/index.html': 'The First Horde',
   'https://js13kgames.com/games/archery-master/index.html': 'Archery Master',
   'https://js13kgames.com/entries/musas-quest': 'Musas quest',
-  'https://js13kgames.com/games/meandering-medieval-merchant/index.html': 'Meandering Medieval Merchant'
+  'https://js13kgames.com/games/meandering-medieval-merchant/index.html': 'Meandering Medieval Merchant',
+  'https://js13kgames.com/entries/moai-alley': 'Moai alley'
 };
 
 
@@ -669,6 +671,7 @@ function submitChoice() {
 	  [ARCHERY_MASTER_GAME_URL]: () => openIframe(ARCHERY_MASTER_GAME_URL),
 	  [MUSAS_QUEST_GAME_URL]: () => openIframe(MUSAS_QUEST_GAME_URL),
 	  [MEANDERING_MEDIEVAL_MERCHANT_GAME_URL]: () => openIframe(MEANDERING_MEDIEVAL_MERCHANT_GAME_URL),
+	  [MOAI_ALLEY_GAME_URL]: () => openIframe(MOAI_ALLEY_GAME_URL),
 	  'randomgif': () => {
 	    const randomGifUrl = gifUrls[Math.floor(Math.random() * gifUrls.length)];
 	    console.log(randomGifUrl);
