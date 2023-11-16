@@ -21,6 +21,10 @@ const SLOWED_DAO_RUN_GAME_URL = 'https://js13kgames.com/games/slowed-dao-run/ind
 const HUGO_THE_WIZARD_GAME_URL = 'https://js13kgames.com/games/hugo-the-wizard/index.html' // mobile
 const JOURNER_TO_THE_EAST_SILK_ROAD = 'https://js13kgames.com/games/journey-to-the-east-silk-road-adventure/index.html' // mobile
 const CRYZEN_GAME_URL = 'https://cryzen.io/' // mobile
+const THE_FIRST_HORDE_GAME_URL = 'https://js13kgames.com/games/the-first-horde/index.html' // mobile
+const ARCHERY_MASTER_GAME_URL = 'https://js13kgames.com/games/archery-master/index.html' // mobile
+const MUSAS_QUEST_GAME_URL = 'https://js13kgames.com/entries/musas-quest' // mobile
+const MEANDERING_MEDIEVAL_MERCHANT_GAME_URL = 'https://js13kgames.com/games/meandering-medieval-merchant/index.html' // mobile
 
 const gameMap = {
   'https://cryzen.io/': 'Cryzen',
@@ -43,7 +47,11 @@ const gameMap = {
   'https://js13kgames.com/games/journey-to-the-east-silk-road-adventure/index.html': 'Journey to the East: Silk Road Adventure',
   'https://pkief.com/Snake/': 'Snake',
   'https://susam.net/invaders.html': 'Invaders',
-  'https://js13kgames.com/games/spacecraft/index.html': 'Spacecraft'
+  'https://js13kgames.com/games/spacecraft/index.html': 'Spacecraft',
+  'https://js13kgames.com/games/the-first-horde/index.html': 'The First Horde',
+  'https://js13kgames.com/games/archery-master/index.html': 'Archery Master',
+  'https://js13kgames.com/entries/musas-quest': 'Musas quest',
+  'https://js13kgames.com/games/meandering-medieval-merchant/index.html': 'Meandering Medieval Merchant'
 };
 
 
@@ -657,6 +665,10 @@ function submitChoice() {
 	  [HUGO_THE_WIZARD_GAME_URL]: () => openIframe(HUGO_THE_WIZARD_GAME_URL),
 	  [JOURNER_TO_THE_EAST_SILK_ROAD]: () => openIframe(JOURNER_TO_THE_EAST_SILK_ROAD),
 	  [CRYZEN_GAME_URL]: () => openIframe(CRYZEN_GAME_URL),
+	  [THE_FIRST_HORDE_GAME_URL]: () => openIframe(THE_FIRST_HORDE_GAME_URL),
+	  [ARCHERY_MASTER_GAME_URL]: () => openIframe(ARCHERY_MASTER_GAME_URL),
+	  [MUSAS_QUEST_GAME_URL]: () => openIframe(MUSAS_QUEST_GAME_URL),
+	  [MEANDERING_MEDIEVAL_MERCHANT_GAME_URL]: () => openIframe(MEANDERING_MEDIEVAL_MERCHANT_GAME_URL),
 	  'randomgif': () => {
 	    const randomGifUrl = gifUrls[Math.floor(Math.random() * gifUrls.length)];
 	    console.log(randomGifUrl);
