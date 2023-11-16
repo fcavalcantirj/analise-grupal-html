@@ -746,6 +746,16 @@ function addExtraOptionsIfNotMobile() {
     form.insertAdjacentHTML('beforeend', extraOptionsHtml);
 }
 
+
+function playRandomGame() {
+	trackEvent('clicked_playRandomGame', 'Game', 'Clicked playRandomGame', 1);
+  var gameKeys = Object.keys(gameMap); // Extract keys from the gameMap
+  var randomIndex = Math.floor(Math.random() * gameKeys.length); // Get a random index
+  var selectedGameUrl = gameKeys[randomIndex]; // Select a game URL using the random index
+
+  openIframe(selectedGameUrl); // Open the selected game in an iframe
+}
+
 document.addEventListener('DOMContentLoaded', function() {
 	console.log('DOMContentLoaded')
     window.addExtraOptionsIfNotMobile();
@@ -775,3 +785,4 @@ window.JOHNNY_CASTAWAY_GIF_ONE_URL = JOHNNY_CASTAWAY_GIF_ONE_URL
 window.showModal = showModal
 window.submitChoice = submitChoice
 window.addExtraOptionsIfNotMobile = addExtraOptionsIfNotMobile
+window.playRandomGame = playRandomGame
