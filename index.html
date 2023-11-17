@@ -58,7 +58,8 @@
       <input type="submit" value="Carregar e Analisar">
       <span style="margin-top: 2rem;">obs: <b>nenhum</b> dado é armazenado!!!</span>
       <span>Não entendi nada!!! Clique <a href="about.html" onclick="trackEvent('about', 'AnaliseGrupal', 'about_clicked', 1);">aqui</a></span>
-      <span><a href="#" onclick="playRandomGame()">Jogo aleatório</a></span>
+      <button class="button-30" role="button" onclick="event.preventDefault(); playRandomGame();">Jogue um jogo aleatório</button>
+      <!-- <span class="space-invader"></span> -->
   </form>
 
   <div id="analysisResults"></div>

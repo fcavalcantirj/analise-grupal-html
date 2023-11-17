@@ -776,6 +776,62 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addExtraOptionsIfNotMobile();
 });
 
+// const spaceInvader = document.querySelector('.space-invader');
+// let posX = 0;
+// let posY = 0;
+// let directionX = 1;
+// let directionY = 1;
+// let speed = 10; // Adjust the speed as needed
+
+// let evasionDistance = 100; // Distance to start evading mouse
+// let evasionSpeed = 1.5; // Multiplier for evasion speed
+
+// function moveSpaceInvader() {
+//     posX += speed * directionX;
+//     posY += speed * directionY;
+
+//     // Check for screen boundaries
+//     if (posX <= 0 || posX + spaceInvader.offsetWidth >= window.innerWidth) {
+//         directionX *= -1;
+//     }
+//     if (posY <= 0 || posY + spaceInvader.offsetHeight >= window.innerHeight) {
+//         directionY *= -1;
+//     }
+
+//     spaceInvader.style.left = `${posX}px`;
+//     spaceInvader.style.top = `${posY}px`;
+
+//     requestAnimationFrame(moveSpaceInvader);
+// }
+
+// requestAnimationFrame(moveSpaceInvader);
+
+// function avoidMouse(event) {
+//     let mouseX = event.clientX;
+//     let mouseY = event.clientY;
+
+//     let spaceInvaderX = posX + spaceInvader.offsetWidth / 2;
+//     let spaceInvaderY = posY + spaceInvader.offsetHeight / 2;
+
+//     let distanceX = spaceInvaderX - mouseX;
+//     let distanceY = spaceInvaderY - mouseY;
+
+//     // Check if the mouse is close to the space invader
+//     if (Math.abs(distanceX) < evasionDistance && Math.abs(distanceY) < evasionDistance) {
+//         // Increase speed when evading
+//         speed = 10 * evasionSpeed;
+
+//         // Update direction to move away from the mouse
+//         directionX = distanceX > 0 ? 1 : -1;
+//         directionY = distanceY > 0 ? 1 : -1;
+//     } else {
+//         // Reset speed
+//         speed = 10;
+//     }
+// }
+
+// document.addEventListener('mousemove', avoidMouse);
+
 
 window.shareOnWhatsApp = shareOnWhatsApp
 window.showSpinner = showSpinner
