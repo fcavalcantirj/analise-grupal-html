@@ -2,10 +2,10 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: Inter,sans-serif;
 }
 body {
-    background-color: #72684F;
+    background-color: #F4F3DA;
     font-family: Arial, sans-serif;
     min-height: 100vh;
     display: flex;
@@ -13,7 +13,7 @@ body {
     align-items: center;
     justify-content: center;
 
-    font-family: 'Roboto', sans-serif; /* New font */
+    font-family: Inter,sans-serif; /* New font */
     color: #333; /* Dark grey text for better readability */
 }
 
@@ -29,13 +29,18 @@ form {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 480px;
+    max-width: 385px;
 
     border: 1px solid #e0e0e0; /* Light border */
 }
 
 img {
     max-width: 100%; /* ensures images are responsive and don't overflow their container */
+    height: auto;
+}
+
+.logo {
+    max-width: 50%; /* ensures images are responsive and don't overflow their container */
     height: auto;
 }
 
@@ -317,7 +322,6 @@ canvas#canvas {
 }
 
 #uploadForm {
-    /* ... other styles ... */
     position: relative;
     z-index: 10;
 }
@@ -334,8 +338,8 @@ canvas#canvas {
   color: #36395A;
   cursor: pointer;
   display: inline-flex;
-  font-family: "JetBrains Mono",monospace;
-  height: 48px;
+  font-family: Inter,sans-serif;
+  height: 27px;
   justify-content: center;
   line-height: 1;
   list-style: none;
@@ -410,4 +414,63 @@ canvas#canvas {
   width: var(--block-size);
   height: var(--block-size);
   overflow: hidden;
+}
+
+/* CSS */
+.button-56 {
+  align-items: center;
+  background-color: #f4f3da;
+  border: 2px solid #111;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #111;
+  cursor: pointer;
+  display: flex;
+  font-family: Inter,sans-serif;
+  font-size: 16px;
+  height: 48px;
+  justify-content: center;
+  line-height: 24px;
+  max-width: 100%;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-56:after {
+  background-color: #111;
+  border-radius: 8px;
+  content: "";
+  display: block;
+  height: 48px;
+  left: 0;
+  width: 100%;
+  position: absolute;
+  top: -2px;
+  transform: translate(8px, 8px);
+  transition: transform .2s ease-out;
+  z-index: -1;
+}
+
+.button-56:hover:after {
+  transform: translate(0, 0);
+}
+
+.button-56:active {
+  background-color: #f8edeb;
+  outline: 0;
+}
+
+.button-56:hover {
+  outline: 0;
+}
+
+@media (min-width: 768px) {
+  .button-56 {
+    padding: 0 40px;
+  }
 }
