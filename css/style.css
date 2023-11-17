@@ -104,6 +104,19 @@ iframe {
     width: 90%; /* Full width on smaller screens */
     margin: 0 auto; /* Center form */
   }
+  input{
+    line-height: 2.15;
+  }
+  input[type="file"] {
+    margin-bottom: 1.5rem;
+    padding: 0rem;
+    border: 1px solid #AAA;
+    border-radius: 4px;
+  }
+  .logo {
+    max-width: 100%; /* ensures images are responsive and don't overflow their container */
+    height: auto;
+  }
 }
 
 footer {
