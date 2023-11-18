@@ -805,7 +805,7 @@ function triggerFunc() {
 function showToast(msg) {
 	window.toast = Toastify({
 	  text: msg,
-	  duration: 4000,
+	  duration: 15000,
 	  newWindow: false,
 	  close: true,
 	  gravity: "top", // `top` or `bottom`
