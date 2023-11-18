@@ -776,7 +776,7 @@ function playRandomGame() {
 
 document.addEventListener('DOMContentLoaded', function() {
     window.addExtraOptionsIfNotMobile();
-    setTimeout(startSpaceInvader, 10000);
+    setTimeout(startSpaceInvader, 8000);
 });
 
 let tapCount = 0;
@@ -862,7 +862,7 @@ function moveSpaceInvader() {
     spaceInvader.style.left = `${posX}px`;
     spaceInvader.style.top = `${posY}px`;
 
-    requestAnimationFrame(moveSpaceInvader);
+    requestAnimationFrame(window.moveSpaceInvader);
 }
 
 function evadeMouse(event) {

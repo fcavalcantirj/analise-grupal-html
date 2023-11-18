@@ -387,8 +387,8 @@ canvas#canvas {
 
 .space-invader {
   position: fixed; /* Changed to fixed for screen-wide movement */
-    top: 50%; /* Initial position */
-    left: 50%; /* Initial position */
+    top: 2%; /* Initial position */
+    left: 5%; /* Initial position */
     transition: top 0.5s, left 0.5s; 
   /* Modify size here: */
   --block-size: 0.5px;
