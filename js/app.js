@@ -109,7 +109,7 @@ const endpointTitles = {
   'top/10': '10 usuários que mandam as maiores mensagens',
   'sentiment/distribution': 'Média de sentimento (LeIA/Vader sentiment analysis)',
   'message/heatmap': 'Mapa de calor | Mensagens enviadas por hora',
-  'message/usercount': 'TOP 20 que mais enviam | BOTTOM 5 que menos enviam',
+  'message/usercount': 'Os que mais falam e os que menos falam',
   'activeusers/10': 'TOP 10 Usuários que mais enviam mensagens',
   'topic_modeling': 'Modelagem de Tópicos' // não está funcionando
 };
@@ -160,15 +160,15 @@ function enableAllAnalyzeButtons(endGame) {
       analyzeButton.disabled = false;
   }
   if(endGame) {
-  	closeIframe()
-  	closeFullscreenGif()
+  	// closeIframe()
+  	// closeFullscreenGif()
+  	showToast("Processamento conslúido. Clique para fechar o jogo!")
   }
 }
 
 function uploadAndShare(imageId, spinnerId, text, analysisType, temperature, endGame) {
 	// console.log(imageId)
 	// console.log(spinnerId)
-	trackEvent('share', 'WhatsApp', 'Content Share Try', 1);
 	gtag('share', 'WhatsApp', {'send_to': 'AW-11398970229/w499CJ7ZufMYEPX2ubsq'});
 	showSpinner(spinnerId);
 	const imgElement = document.getElementById(imageId);
@@ -187,8 +187,9 @@ function uploadAndShare(imageId, spinnerId, text, analysisType, temperature, end
 	          .then(data => {
 	          	hideSpinner(spinnerId)
 	            if (endGame) {
-	              closeIframe()
-	              closeFullscreenGif()
+	              // closeIframe()
+	              // closeFullscreenGif()
+	            	showToast("Processamento conslúido. Clique para fechar o jogo!")
 	            }
 	            let _text;
 	            if(text && analysisType && temperature) {
@@ -214,16 +215,18 @@ function uploadAndShare(imageId, spinnerId, text, analysisType, temperature, end
 	          .catch(error => {
 	          	hideSpinner(spinnerId)
 	            if (endGame) {
-	              closeIframe()
-	              closeFullscreenGif()
+	              // closeIframe()
+	              // closeFullscreenGif()
+	            	showToast("Processamento conslúido. Clique para fechar o jogo!")
 	            }
 	            console.error('Error uploading to Imgur or sharing on WhatsApp:', error);
 	          });
 	      }).catch(error => {
 	      	  hideSpinner(spinnerId)
 	          if (endGame) {
-	           	closeIframe()
-	            closeFullscreenGif()
+	           	// closeIframe()
+	            // closeFullscreenGif()
+	            showToast("Processamento conslúido. Clique para fechar o jogo!")
 	          }
 	          console.error('Invalid image for upload:', error);
 	      });
@@ -377,7 +380,8 @@ async function analyzeAndShare(imageId, analysisType, temperature, spinnerId) {
   trackEvent('clicked_analyzeAndShare', 'Form', 'Clicked analyseAndShare', 1);
   const imageNumber = parseInt(imageId.replace(/[^\d]/g, ''), 10);
   if(imageNumber > 1) {
-    alert('Não implementado, confira novamente amanhã');
+    // alert('Não implementado, confira novamente amanhã');
+    showToast("Não implementado, confira novamente amanhã")
     closeIframe()
     closeFullscreenGif()
     return;
@@ -701,7 +705,7 @@ document.addEventListener('keydown', (e) => {
   if (e.key === konamiCode[konamiIndex]) {
     konamiIndex++;
     if (konamiIndex === konamiCode.length) {
-      activateEasterEgg();
+      window.activatedByKonami();
       konamiIndex = 0; // reset the index
     }
   } else {
@@ -710,11 +714,9 @@ document.addEventListener('keydown', (e) => {
 });
 
 // Activate the easter egg
-function activateEasterEgg() {
-  // You can call any function here, such as opening a modal with a game
-  console.log('Easter egg activated!');
-  openIframe(PORTOLANI_GAME_URL)
-  // For example: openGame('snake'); // This would be a function to start the Snake game
+function activatedByKonami() {
+	trackEvent('easteregg_konami', 'EasterEgg', 'User typed konami code', 1);
+	openIframe(PORTOLANI_GAME_URL)
 }
 
 let typedWord = '';
@@ -731,6 +733,7 @@ document.addEventListener('keypress', (e) => {
 });
 
 function showTheDudeGif() {
+	trackEvent('easteregg_thedude', 'EasterEgg', 'User wrote brow', 1);
   openFullscreenGif('https://analisegrupal.com.br/img/thedude.gif')
 }
 
@@ -772,9 +775,55 @@ function playRandomGame() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-	console.log('DOMContentLoaded')
     window.addExtraOptionsIfNotMobile();
 });
+
+let tapCount = 0;
+const TAP_THRESHOLD = 6; // Number of taps required
+
+function resetTapCount() {
+    tapCount = 0;
+}
+
+document.addEventListener('touchend', function(e) {
+    tapCount++;
+
+    if (tapCount === TAP_THRESHOLD) {
+        // Trigger your easter egg function here
+        window.triggerFunc();
+    }
+
+    // Reset tap count after a short delay to prevent continuous trigger
+    setTimeout(resetTapCount, 1250); // Reset after 1 second
+});
+
+function triggerFunc() {
+	trackEvent('easteregg_tap6times', 'EasterEgg', 'User taped 6 times', 1);
+    openIframe(CRYZEN_GAME_URL)
+}
+
+function showToast(msg) {
+	window.toast = Toastify({
+	  text: msg,
+	  duration: 4000,
+	  newWindow: false,
+	  close: true,
+	  gravity: "top", // `top` or `bottom`
+	  position: "left", // `left`, `center` or `right`
+	  stopOnFocus: true, // Prevents dismissing of toast on hover
+	  style: {
+	    background: "linear-gradient(to right, #00b09b, #96c93d)",
+	  },
+	  onClick: closeGame
+	}).showToast();
+}
+
+function closeGame() {
+	window.closeIframe()
+	window.closeFullscreenGif()
+	window.toast.hideToast()
+}
+
 
 // const spaceInvader = document.querySelector('.space-invader');
 // let posX = 0;
@@ -832,7 +881,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // document.addEventListener('mousemove', avoidMouse);
 
-
+window.activatedByKonami = activatedByKonami
+window.triggerFunc = triggerFunc
 window.shareOnWhatsApp = shareOnWhatsApp
 window.showSpinner = showSpinner
 window.hideSpinner = hideSpinner
