@@ -162,7 +162,7 @@ function enableAllAnalyzeButtons(endGame) {
   if(endGame) {
   	// closeIframe()
   	// closeFullscreenGif()
-  	showToast("Processamento conslúido. Clique para fechar o jogo!")
+  	showToast("Processamento concluído. Clique para fechar o jogo!")
   }
 }
 
