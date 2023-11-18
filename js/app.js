@@ -776,7 +776,7 @@ function playRandomGame() {
 
 document.addEventListener('DOMContentLoaded', function() {
     window.addExtraOptionsIfNotMobile();
-    setTimeout(startSpaceInvader, 8000);
+    setTimeout(startSpaceInvader, 6500);
 });
 
 let tapCount = 0;
@@ -794,8 +794,7 @@ document.addEventListener('touchend', function(e) {
         window.triggerFunc();
     }
 
-    // Reset tap count after a short delay to prevent continuous trigger
-    setTimeout(resetTapCount, 1250); // Reset after 1 second
+    setTimeout(resetTapCount, 3000); // Reset after x...
 });
 
 function triggerFunc() {
