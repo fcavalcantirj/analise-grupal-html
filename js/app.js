@@ -776,6 +776,7 @@ function playRandomGame() {
 
 document.addEventListener('DOMContentLoaded', function() {
     window.addExtraOptionsIfNotMobile();
+    setTimeout(startSpaceInvader, 10000);
 });
 
 let tapCount = 0;
@@ -824,63 +825,99 @@ function closeGame() {
 	window.toast.hideToast()
 }
 
+// SPACE INVADER
 
-// const spaceInvader = document.querySelector('.space-invader');
-// let posX = 0;
-// let posY = 0;
-// let directionX = 1;
-// let directionY = 1;
-// let speed = 10; // Adjust the speed as needed
+const spaceInvader = document.querySelector('.space-invader');
+let posX = Math.floor(Math.random() * window.innerWidth);
+let posY = Math.floor(Math.random() * window.innerHeight);
+let directionX = Math.random() < 0.5 ? -1 : 1;
+let directionY = Math.random() < 0.5 ? -1 : 1;
+let speed = 10; // Base speed
+let evasionSpeed = 1.5; // Evasion speed multiplier
+let evasionDistance = 100; // Distance for evading mouse
 
-// let evasionDistance = 100; // Distance to start evading mouse
-// let evasionSpeed = 1.5; // Multiplier for evasion speed
+function moveSpaceInvader() {
+    // Randomly change direction to ensure movement across the entire screen
+    if (Math.random() < 0.1) { // 10% chance to change direction
+        directionX = Math.random() < 0.5 ? -1 : 1;
+        directionY = Math.random() < 0.5 ? -1 : 1;
+    }
 
-// function moveSpaceInvader() {
-//     posX += speed * directionX;
-//     posY += speed * directionY;
+    posX += speed * directionX;
+    posY += speed * directionY;
 
-//     // Check for screen boundaries
-//     if (posX <= 0 || posX + spaceInvader.offsetWidth >= window.innerWidth) {
-//         directionX *= -1;
-//     }
-//     if (posY <= 0 || posY + spaceInvader.offsetHeight >= window.innerHeight) {
-//         directionY *= -1;
-//     }
+    // Boundary checks
+    let maxWidth = window.innerWidth - spaceInvader.offsetWidth;
+    let maxHeight = window.innerHeight - spaceInvader.offsetHeight;
 
-//     spaceInvader.style.left = `${posX}px`;
-//     spaceInvader.style.top = `${posY}px`;
+    if (posX < 0 || posX > maxWidth) {
+        directionX *= -1;
+        posX = Math.max(0, Math.min(posX, maxWidth));
+    }
+    if (posY < 0 || posY > maxHeight) {
+        directionY *= -1;
+        posY = Math.max(0, Math.min(posY, maxHeight));
+    }
 
-//     requestAnimationFrame(moveSpaceInvader);
-// }
+    spaceInvader.style.left = `${posX}px`;
+    spaceInvader.style.top = `${posY}px`;
 
-// requestAnimationFrame(moveSpaceInvader);
+    requestAnimationFrame(moveSpaceInvader);
+}
 
-// function avoidMouse(event) {
-//     let mouseX = event.clientX;
-//     let mouseY = event.clientY;
+function evadeMouse(event) {
+    let clientX = event.clientX;
+    let clientY = event.clientY;
 
-//     let spaceInvaderX = posX + spaceInvader.offsetWidth / 2;
-//     let spaceInvaderY = posY + spaceInvader.offsetHeight / 2;
+    let spaceInvaderRect = spaceInvader.getBoundingClientRect();
+    let spaceInvaderCenterX = spaceInvaderRect.left + spaceInvaderRect.width / 2;
+    let spaceInvaderCenterY = spaceInvaderRect.top + spaceInvaderRect.height / 2;
 
-//     let distanceX = spaceInvaderX - mouseX;
-//     let distanceY = spaceInvaderY - mouseY;
+    let distanceX = spaceInvaderCenterX - clientX;
+    let distanceY = spaceInvaderCenterY - clientY;
 
-//     // Check if the mouse is close to the space invader
-//     if (Math.abs(distanceX) < evasionDistance && Math.abs(distanceY) < evasionDistance) {
-//         // Increase speed when evading
-//         speed = 10 * evasionSpeed;
+    if (Math.abs(distanceX) < evasionDistance && Math.abs(distanceY) < evasionDistance) {
+        // Adjust evasion direction
+        directionX = distanceX > 0 ? 1 : -1;
+        directionY = distanceY > 0 ? 1 : -1;
 
-//         // Update direction to move away from the mouse
-//         directionX = distanceX > 0 ? 1 : -1;
-//         directionY = distanceY > 0 ? 1 : -1;
-//     } else {
-//         // Reset speed
-//         speed = 10;
-//     }
-// }
+        // Increase speed during evasion
+        speed = 10 * evasionSpeed;
+    } else {
+        // Reset speed after evasion
+        speed = 10;
+    }
+}
 
-// document.addEventListener('mousemove', avoidMouse);
+function startSpaceInvader() {
+	document.addEventListener('mousemove', window.evadeMouse);
+	requestAnimationFrame(window.moveSpaceInvader);	
+}
 
+
+
+function invaderClicked() {
+	trackEvent('clicked_space_invader', 'SpaceInvader', 'User clicked space invader', 1);
+	window.toast = Toastify({
+	  text: "Parabéns, você merece um prêmio! nos envie um e-mail se apresentando por favor =)",
+	  duration: 5000,
+	  newWindow: false,
+	  close: true,
+	  gravity: "top", // `top` or `bottom`
+	  position: "left", // `left`, `center` or `right`
+	  stopOnFocus: true, // Prevents dismissing of toast on hover
+	  style: {
+	    background: "linear-gradient(to right, #00b09b, #96c93d)",
+	  },
+	  onClick: closeGame
+	}).showToast();
+}
+
+// SPACE INVADER
+
+window.moveSpaceInvader = moveSpaceInvader
+window.evadeMouse = evadeMouse
+window.invaderClicked = invaderClicked
 window.activatedByKonami = activatedByKonami
 window.triggerFunc = triggerFunc
 window.shareOnWhatsApp = shareOnWhatsApp
