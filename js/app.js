@@ -1,8 +1,8 @@
 // const TETHER_GAME_URL = 'https://tether.rayhanadev.repl.co/'
 
-const SNAKE_GAME_URL = 'https://pkief.com/Snake/'
-const INVADERS_GAME_URL = 'https://susam.net/invaders.html'
-const SPACECRAFT_GAME_URL = 'https://js13kgames.com/games/spacecraft/index.html'
+const SNAKE_GAME_URL = 'https://pkief.com/Snake/' // mobile
+const INVADERS_GAME_URL = 'https://susam.net/invaders.html' // mobile
+const SPACECRAFT_GAME_URL = 'https://js13kgames.com/games/spacecraft/index.html' // mobile
 const PATH_TO_GLORY_GAME_URL = 'https://js13kgames.com/games/path-to-glory/index.html' // mobile
 const MERLIN_VS_ALFONSO_GAME_URL = 'https://js13kgames.com/games/merlin-vs-alfonso/index.html' //mobile
 const CASUAL_CRUSADE_GAME_URL = 'https://js13kgames.com/games/casual-crusade/index.html' // mobile
@@ -16,7 +16,6 @@ const RUNEKEEPER_GAME_URL = 'https://js13kgames.com/games/runekeeper/index.html'
 const KNIGHTING_OF_SIR_ISAAC_GAME_URL = 'https://js13kgames.com/games/the-knighting-of-sr-isaac/index.html' // mobile
 const KHAN_GAME_URL = 'https://js13kgames.com/games/khan-westward-conquest/index.html' // mobile
 const BEWITHED_GAME_URL = 'https://js13kgames.com/games/bewitched/index.html' // mobile
-const BARBERS_GUILD_GAME_URL = 'https://js13kgames.com/games/13th-barbers-guild/index.html?lang=pt' // mobile
 const SLOWED_DAO_RUN_GAME_URL = 'https://js13kgames.com/games/slowed-dao-run/index.html' // mobile
 const HUGO_THE_WIZARD_GAME_URL = 'https://js13kgames.com/games/hugo-the-wizard/index.html' // mobile
 const JOURNER_TO_THE_EAST_SILK_ROAD = 'https://js13kgames.com/games/journey-to-the-east-silk-road-adventure/index.html' // mobile
@@ -26,9 +25,26 @@ const ARCHERY_MASTER_GAME_URL = 'https://js13kgames.com/games/archery-master/ind
 const MUSAS_QUEST_GAME_URL = 'https://js13kgames.com/games/musas-quest/index.html' // mobile
 const MEANDERING_MEDIEVAL_MERCHANT_GAME_URL = 'https://js13kgames.com/games/meandering-medieval-merchant/index.html' // mobile
 const MOAI_ALLEY_GAME_URL = 'https://js13kgames.com/games/moai-alley/index.html' // mobile
+const SUPER_CASTLE_GAME_URL = 'https://js13kgames.com/games/super-castle-game/index.html' // mobile
 
-const gameMap = {
-  'https://cryzen.io/': 'Cryzen',
+const FEAST_NIGHT_GAME_URL = 'https://js13kgames.com/games/feast-night/index.html' // desktop
+const KINIGHT_DREAMS_GAME_URL = 'https://js13kgames.com/games/knight-dreams/index.html' // desktop
+const ROBIN_OF_THIRTEENSLEY_GAME_URL = 'https://js13kgames.com/games/robin-of-thirteensley/index.html' // desktop
+const FORT_KINGHT_GAME_URL = 'https://js13kgames.com/games/fort-knight/index.html' // desktop
+const THE_TERROR_OF_MONGOLIA_GAME_URL = 'https://js13kgames.com/games/the-terror-of-mongolia/index.html' // desktop
+const WITCH_CUP_1276_GAME_URL = 'https://js13kgames.com/games/witchcup1276/index.html' // desktop
+
+const desktopGameMap = {
+	'https://js13kgames.com/games/feast-night/index.html': 'Feast Night',
+	'https://js13kgames.com/games/knight-dreams/index.html': 'Knight Dreams',
+	'https://js13kgames.com/games/robin-of-thirteensley/index.html': 'Robin of Thirteensley',
+	'https://js13kgames.com/games/fort-knight/index.html': 'Fort Knight',
+	'https://js13kgames.com/games/the-terror-of-mongolia/index.html': 'The Terror of Mongolia',
+	'https://js13kgames.com/games/witchcup1276/index.html': 'Witch Cup 1276'
+};
+
+const mobileGameMap = {
+	'https://js13kgames.com/games/super-castle-game/index.html': 'Super Castle Game',
   'https://js13kgames.com/games/path-to-glory/index.html': 'Path to Glory',
   'https://js13kgames.com/games/merlin-vs-alfonso/index.html': 'Merlin vs Alfonso',
   'https://js13kgames.com/games/casual-crusade/index.html': 'Casual Crusade',
@@ -42,7 +58,6 @@ const gameMap = {
   'https://js13kgames.com/games/the-knighting-of-sr-isaac/index.html': 'Knighting of Sir Isaac',
   'https://js13kgames.com/games/khan-westward-conquest/index.html': 'Khan: Westward Conquest',
   'https://js13kgames.com/games/bewitched/index.html': 'Bewitched',
-  'https://js13kgames.com/games/13th-barbers-guild/index.html?lang=pt': 'Barbers Guild',
   'https://js13kgames.com/games/slowed-dao-run/index.html': 'Slowed Dao Run',
   'https://js13kgames.com/games/hugo-the-wizard/index.html': 'Hugo the Wizard',
   'https://js13kgames.com/games/journey-to-the-east-silk-road-adventure/index.html': 'Journey to the East: Silk Road Adventure',
@@ -52,7 +67,6 @@ const gameMap = {
   'https://js13kgames.com/games/the-first-horde/index.html': 'The First Horde',
   'https://js13kgames.com/games/archery-master/index.html': 'Archery Master',
   'https://js13kgames.com/games/musas-quest/index.html': 'Musas quest',
-  'https://js13kgames.com/games/meandering-medieval-merchant/index.html': 'Meandering Medieval Merchant',
   'https://js13kgames.com/games/moai-alley/index.html': 'Moai alley'
 };
 
@@ -333,8 +347,10 @@ function createButtonSet(imageSrc, text, index, type) {
 	    form.appendChild(sliderLabel);
 
 	    // Button to trigger the analysis
+	    //<button class="button-4" role="button">Button 4</button>
 	    const analyzeButton = document.createElement('button');
 	    analyzeButton.id = `analyze${index}`
+	    analyzeButton.className = `button-4`
 	    analyzeButton.type = 'button'; // Prevent form submission
 	    analyzeButton.innerText = text;
 	    analyzeButton.disabled = true
@@ -379,7 +395,7 @@ function createRadioButton(id, value, isChecked) {
 async function analyzeAndShare(imageId, analysisType, temperature, spinnerId) {
   trackEvent('clicked_analyzeAndShare', 'Form', 'Clicked analyseAndShare', 1);
   const imageNumber = parseInt(imageId.replace(/[^\d]/g, ''), 10);
-  if(imageNumber > 1) {
+  if(imageNumber > 2) {
     // alert('Não implementado, confira novamente amanhã');
     showToast("Não implementado, confira novamente amanhã")
     closeIframe()
@@ -400,6 +416,9 @@ async function analyzeAndShare(imageId, analysisType, temperature, spinnerId) {
 
     if (imageNumber === 1) {
       _url = `${API_DOMAIN}/whatsapp/message/avg_sentiment_per_person/analyse`
+    }
+    if (imageNumber === 2) {
+      _url = `${API_DOMAIN}/whatsapp/message/sentiment_over_time/analyse`
     }
 
     const response = await fetch(_url, {
@@ -650,6 +669,15 @@ function submitChoice() {
   modal.style.display = "none";
 
   const actionMap = {
+  	//desktop
+  	[WITCH_CUP_1276_GAME_URL]: () => openIframe(WITCH_CUP_1276_GAME_URL),
+  	[THE_TERROR_OF_MONGOLIA_GAME_URL]: () => openIframe(THE_TERROR_OF_MONGOLIA_GAME_URL),
+  	[FORT_KINGHT_GAME_URL]: () => openIframe(FORT_KINGHT_GAME_URL),
+  	[ROBIN_OF_THIRTEENSLEY_GAME_URL]: () => openIframe(ROBIN_OF_THIRTEENSLEY_GAME_URL),
+  	[KINIGHT_DREAMS_GAME_URL]: () => openIframe(KINIGHT_DREAMS_GAME_URL),
+  	[FEAST_NIGHT_GAME_URL]: () => openIframe(FEAST_NIGHT_GAME_URL),
+  	[SUPER_CASTLE_GAME_URL]: () => openIframe(SUPER_CASTLE_GAME_URL),
+  	//mobile
 	  [SNAKE_GAME_URL]: () => openIframe(SNAKE_GAME_URL),
 	  [INVADERS_GAME_URL]: () => openIframe(INVADERS_GAME_URL),
 	  [SPACECRAFT_GAME_URL]: () => openIframe(SPACECRAFT_GAME_URL),
@@ -666,7 +694,6 @@ function submitChoice() {
 	  [KNIGHTING_OF_SIR_ISAAC_GAME_URL]: () => openIframe(KNIGHTING_OF_SIR_ISAAC_GAME_URL),
 	  [KHAN_GAME_URL]: () => openIframe(KHAN_GAME_URL),
 	  [BEWITHED_GAME_URL]: () => openIframe(BEWITHED_GAME_URL),
-	  [BARBERS_GUILD_GAME_URL]: () => openIframe(BARBERS_GUILD_GAME_URL),
 	  [SLOWED_DAO_RUN_GAME_URL]: () => openIframe(SLOWED_DAO_RUN_GAME_URL),
 	  [HUGO_THE_WIZARD_GAME_URL]: () => openIframe(HUGO_THE_WIZARD_GAME_URL),
 	  [JOURNER_TO_THE_EAST_SILK_ROAD]: () => openIframe(JOURNER_TO_THE_EAST_SILK_ROAD),
@@ -674,7 +701,6 @@ function submitChoice() {
 	  [THE_FIRST_HORDE_GAME_URL]: () => openIframe(THE_FIRST_HORDE_GAME_URL),
 	  [ARCHERY_MASTER_GAME_URL]: () => openIframe(ARCHERY_MASTER_GAME_URL),
 	  [MUSAS_QUEST_GAME_URL]: () => openIframe(MUSAS_QUEST_GAME_URL),
-	  [MEANDERING_MEDIEVAL_MERCHANT_GAME_URL]: () => openIframe(MEANDERING_MEDIEVAL_MERCHANT_GAME_URL),
 	  [MOAI_ALLEY_GAME_URL]: () => openIframe(MOAI_ALLEY_GAME_URL),
 	  'randomgif': () => {
 	    const randomGifUrl = gifUrls[Math.floor(Math.random() * gifUrls.length)];
@@ -713,10 +739,9 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// Activate the easter egg
 function activatedByKonami() {
-	trackEvent('easteregg_konami', 'EasterEgg', 'User typed konami code', 1);
-	openIframe(PORTOLANI_GAME_URL)
+	trackEvent('eegg_konami', 'EEg', 'User typed konami code', 1);
+	openIframe(MEANDERING_MEDIEVAL_MERCHANT_GAME_URL)
 }
 
 let typedWord = '';
@@ -733,33 +758,36 @@ document.addEventListener('keypress', (e) => {
 });
 
 function showTheDudeGif() {
-	trackEvent('easteregg_thedude', 'EasterEgg', 'User wrote brow', 1);
+	trackEvent('eegg_thedude', 'EEg', 'User wrote brow', 1);
   openFullscreenGif('https://analisegrupal.com.br/img/thedude.gif')
 }
 
 let enteredOnce = false
 function addExtraOptionsIfNotMobile() {
-    // console.log('addExtraOptionsIfNotMobile')
-    // console.log(navigator.userAgent)
     if (enteredOnce) {
-        // console.log(`enteredOnce checked. exiting`)
         return;
     }
+    var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     enteredOnce = true;
 
-    // Check if the user agent is mobile
-    var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-    var extraOptionsHtml = '<select name="game" id="gameSelect">';
-    for (var url in gameMap) {
-        var gameTitle = gameMap[url];
-        extraOptionsHtml += '<option value="' + url + '">Jogar ' + gameTitle + '</option>';
+    var optionsArray = [];
+    for (var url in mobileGameMap) {
+        var gameTitle = mobileGameMap[url];
+        optionsArray.push('<option value="' + url + '">Jogar ' + gameTitle + '</option>');
     }
-    extraOptionsHtml += '<option value="randomgif">Gif aleatório</option>'
-    extraOptionsHtml += '</select>';
+    if(!isMobile) {
+        for (var url in desktopGameMap) {
+            var gameTitle = desktopGameMap[url];
+            optionsArray.push('<option value="' + url + '">Jogar ' + gameTitle + '</option>');
+        }
+    }
+    optionsArray.push('<option value="randomgif">Gif aleatório</option>');
+
+    optionsArray.sort(() => Math.random() - 0.5);
+
+    var extraOptionsHtml = '<select name="game" id="gameSelect">' + optionsArray.join('') + '</select>';
     extraOptionsHtml += '<button type="button" onclick="submitChoice()" class="ok-button">OK</button>';
 
-    // Append the extra options to the form
     var form = document.getElementById('waitingOptions');
     form.insertAdjacentHTML('beforeend', extraOptionsHtml);
 }
@@ -767,16 +795,21 @@ function addExtraOptionsIfNotMobile() {
 
 function playRandomGame() {
 	trackEvent('clicked_playRandomGame', 'Game', 'Clicked playRandomGame', 1);
-  var gameKeys = Object.keys(gameMap); // Extract keys from the gameMap
+  var gameKeys = Object.keys(mobileGameMap); // Extract keys from the mobileGameMap
   var randomIndex = Math.floor(Math.random() * gameKeys.length); // Get a random index
   var selectedGameUrl = gameKeys[randomIndex]; // Select a game URL using the random index
 
   openIframe(selectedGameUrl); // Open the selected game in an iframe
 }
 
+function printAnaliseGrupalWelcomeMsg() {
+	console.log(`Welcome to this little open-source experiment!!!\n\nThere are some easter eggs hidden =)\nHappy hunting!\n\n\n\n\n type 'brow' for example, or try to touch the fly =)`);
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     window.addExtraOptionsIfNotMobile();
-    setTimeout(startSpaceInvader, 6500);
+    setTimeout(startSpaceInvader, 6000);
+    printAnaliseGrupalWelcomeMsg()
 });
 
 let tapCount = 0;
@@ -788,18 +821,15 @@ function resetTapCount() {
 
 document.addEventListener('touchend', function(e) {
     tapCount++;
-
     if (tapCount === TAP_THRESHOLD) {
-        // Trigger your easter egg function here
         window.triggerFunc();
     }
-
-    setTimeout(resetTapCount, 3000); // Reset after x...
+    setTimeout(resetTapCount, 5000); // Reset after x...
 });
 
 function triggerFunc() {
-	trackEvent('easteregg_tap6times', 'EasterEgg', 'User taped 6 times', 1);
-    openIframe(CRYZEN_GAME_URL)
+	trackEvent('eegg_tap6times', 'EEg', 'User taped 6 times', 1);
+  openIframe(CRYZEN_GAME_URL)
 }
 
 function showToast(msg) {
@@ -914,6 +944,7 @@ function invaderClicked() {
 
 // SPACE INVADER
 
+window.printAnaliseGrupalWelcomeMsg = printAnaliseGrupalWelcomeMsg
 window.moveSpaceInvader = moveSpaceInvader
 window.evadeMouse = evadeMouse
 window.invaderClicked = invaderClicked
