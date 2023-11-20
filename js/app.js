@@ -129,8 +129,8 @@ const endpointTitles = {
 };
 
 const MAX_RETRIES = 2;
-const API_DOMAIN = 'https://api.analisegrupal.com.br'
-// const API_DOMAIN = 'http://localhost:5000'
+// const API_DOMAIN = 'https://api.analisegrupal.com.br'
+const API_DOMAIN = 'http://localhost:5000'
 
 function shareOnWhatsApp(imageUrl, customMessage) {
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -395,7 +395,7 @@ function createRadioButton(id, value, isChecked) {
 async function analyzeAndShare(imageId, analysisType, temperature, spinnerId) {
   trackEvent('clicked_analyzeAndShare', 'Form', 'Clicked analyseAndShare', 1);
   const imageNumber = parseInt(imageId.replace(/[^\d]/g, ''), 10);
-  if(imageNumber > 4) {
+  if(imageNumber > 5) {
     showToast("Não implementado, confira novamente amanhã")
     closeIframe()
     closeFullscreenGif()
@@ -424,6 +424,9 @@ async function analyzeAndShare(imageId, analysisType, temperature, spinnerId) {
     }
     if (imageNumber === 4) {
       _url = `${API_DOMAIN}/whatsapp/message/activity_heatmap/analyse`
+    }
+    if (imageNumber === 5) {
+      _url = `${API_DOMAIN}/whatsapp/message/conversational_turns/analyse`
     }
 
     const response = await fetch(_url, {
