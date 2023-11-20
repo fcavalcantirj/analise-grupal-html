@@ -395,7 +395,7 @@ function createRadioButton(id, value, isChecked) {
 async function analyzeAndShare(imageId, analysisType, temperature, spinnerId) {
   trackEvent('clicked_analyzeAndShare', 'Form', 'Clicked analyseAndShare', 1);
   const imageNumber = parseInt(imageId.replace(/[^\d]/g, ''), 10);
-  if(imageNumber > 5) {
+  if(imageNumber > 12) {
     showToast("Não implementado, confira novamente amanhã")
     closeIframe()
     closeFullscreenGif()
@@ -427,6 +427,27 @@ async function analyzeAndShare(imageId, analysisType, temperature, spinnerId) {
     }
     if (imageNumber === 5) {
       _url = `${API_DOMAIN}/whatsapp/message/conversational_turns/analyse`
+    }
+    if (imageNumber === 6) {
+      _url = `${API_DOMAIN}/whatsapp/message/active_days/analyse`
+    }
+    if (imageNumber === 7) {
+      _url = `${API_DOMAIN}/whatsapp/message/topic_percentage/analyse`
+    }
+    if (imageNumber === 8) {
+      _url = `${API_DOMAIN}/whatsapp/message/wordfrequency/25/analyse`
+    }
+    if (imageNumber === 9) {
+      _url = `${API_DOMAIN}/whatsapp/message/wordcloud/analyse`
+    }
+    if (imageNumber === 10) {
+      _url = `${API_DOMAIN}/whatsapp/message/lenghiest/top/10/analyse`
+    }
+    if (imageNumber === 11) {
+      _url = `${API_DOMAIN}/whatsapp/message/sentiment/distribution/analyse`
+    }
+    if (imageNumber === 12) {
+      _url = `${API_DOMAIN}/whatsapp/message/usercount/analyse`
     }
 
     const response = await fetch(_url, {
