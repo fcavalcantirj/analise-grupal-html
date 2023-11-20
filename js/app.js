@@ -395,7 +395,7 @@ function createRadioButton(id, value, isChecked) {
 async function analyzeAndShare(imageId, analysisType, temperature, spinnerId) {
   trackEvent('clicked_analyzeAndShare', 'Form', 'Clicked analyseAndShare', 1);
   const imageNumber = parseInt(imageId.replace(/[^\d]/g, ''), 10);
-  if(imageNumber > 3) {
+  if(imageNumber > 4) {
     showToast("Não implementado, confira novamente amanhã")
     closeIframe()
     closeFullscreenGif()
@@ -421,6 +421,9 @@ async function analyzeAndShare(imageId, analysisType, temperature, spinnerId) {
     }
     if (imageNumber === 3) {
       _url = `${API_DOMAIN}/whatsapp/message/peak_response_time/analyse`
+    }
+    if (imageNumber === 4) {
+      _url = `${API_DOMAIN}/whatsapp/message/activity_heatmap/analyse`
     }
 
     const response = await fetch(_url, {
