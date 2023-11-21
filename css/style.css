@@ -6,7 +6,6 @@
 }
 body {
     background-color: #F4F3DA;
-    font-family: Arial, sans-serif;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -16,6 +15,49 @@ body {
     font-family: Inter,sans-serif; /* New font */
     color: #333; /* Dark grey text for better readability */
 }
+/*teste*/
+
+.hero-section {
+      padding: 4rem 1rem;
+      text-align: center;
+      background-color: #009688; /* Or any other primary color */
+      color: white;
+    }
+
+    .content-wrapper {
+      max-width: 960px; /* Or 80% for full width on mobile */
+      margin: auto;
+      padding: 1rem;
+      background: #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transform: translateY(-50px); /* Pull the content up over the hero section */
+    }
+
+    .call-to-action {
+      background: #009688;
+      color: white;
+      padding: 2rem;
+      margin-top: 2rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    ul {
+      list-style-type: none; /* Removes default list styling */
+      padding: 0;
+    }
+
+    ul li {
+      padding: 0.5rem 0;
+    }
+
+    ul li:before {
+      content: '•'; /* Adds a custom bullet */
+      color: #009688; /* Or any other color */
+      font-weight: bold;
+      display: inline-block; 
+      width: 1em; 
+      margin-left: -1em;
+    }
+/*end teste*/
 
 h1 {
       color: #333;
@@ -98,11 +140,20 @@ iframe {
   border: none;
 }
 
-footer {
+/*footer {
     margin-top: 2rem;
     text-align: center;
     width: 100%;
     margin-bottom: 1rem;
+}*/
+
+footer {
+  width: 100%;
+  background: #333; /* Dark background for footer */
+  color: white; /* Light text for contrast */
+  text-align: center; /* Center the text */
+  padding: 1rem 0; /* Padding top and bottom */
+  margin-top: auto;
 }
 
 footer p {
@@ -428,7 +479,7 @@ canvas#canvas {
 /* CSS */
 .button-56 {
   align-items: center;
-  background-color: #f4f3da;
+  background-color: #EE7600;
   border: 2px solid #111;
   border-radius: 8px;
   box-sizing: border-box;

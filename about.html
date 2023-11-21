@@ -32,7 +32,6 @@
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
-            padding: 4rem 1rem;
         }
 
         .container {
@@ -78,13 +77,38 @@
         ol {
             margin-left: 2rem;
         }
+        .thumb img {
+  border: 1px solid #ddd; /* Gray border */
+  border-radius: 4px;  /* Rounded border */
+  padding: 5px; /* Some padding */
+  width: 150px; /* Set a small width */
+}
+
+/* Add a hover effect (blue shadow) */
+.thumb img:hover {
+  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
     </style>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet" />
+    <!-- Lightbox2 JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
 </head>
 <body>
   <div class="container">
     <h1>Sobre o Analise Grupal</h1>
-    <p>O Analise Grupal é um projeto de código <a href="https://github.com/fcavalcantirj/analise-grupal-api" targer="_blank">aberto</a> criado com a assistência do ChatGPT, com o objetivo de proporcionar uma experiência divertida e informativa para pessoas que desejam obter estatísticas e insights sobre chats de grupos no WhatsApp. Nós garantimos que <strong>nenhum dado é armazenado</strong> em nossos servidores.</p>
+
+    <p>O <b>Análise Grupal</b> é uma ferramenta de código <a href="https://github.com/fcavalcantirj/analise-grupal-api" targer="_blank">aberto</a>, criada por IA (ChatGPT-4), para desvendar a dinâmica dos seus grupos de WhatsApp. Gratuita, open-source e fácil de usar, nossa ferramenta oferece uma análise detalhada, proporcionando insights valiosos sobre os tópicos mais discutidos, o humor do grupo, e muito mais. Nós garantimos que <strong>nenhum dado é armazenado</strong> em nossos <a href="https://github.com/fcavalcantirj/analise-grupal-api" target="_blank">servidores</a>.</p>
     
+    <h2>Por que usar o Analise Grupal?</h2>
+    <ol>
+      <li>100% gratuito e de código aberto.</li>
+      <li>Interface simples e intuitiva – análises complexas feitas de maneira descomplicada.</li>
+      <li>Descubra a percentagem de tópicos discutidos, quem são os participantes mais ativos, a vibe geral do grupo e muito mais!</li>
+      <li>Respeito total à sua privacidade: análises feitas <a href="https://github.com/fcavalcantirj/analise-grupal-api" target="_blank">sem armazenar</a><b> seus dados</b>.</li>
+      <li>Transforme suas conversas em conhecimento e diversão. Experimente agora e veja sua comunicação sob uma nova perspectiva!</li>
+    </ol>
+
     <h2>Como Exportar Seu Chat do WhatsApp</h2>
     <ol>
       <li>Acesse o WhatsApp e abra o chat do grupo que deseja <a href="https://tecnoblog.net/responde/whatsapp-salvar-historico-conversa/" target="_blank">exportar</a>.</li>
@@ -107,8 +131,25 @@
     <h2>Serviços Personalizados de Gráficos</h2>
     <p>Além da nossa ferramenta de análise open-source padrão, o Análise Grupal também oferece serviços personalizados de criação de gráficos. Se você é um indivíduo ou representa um negócio que precisa de insights e visualizações de dados específicos, estamos prontos para ajudar. Entre em contato conosco para discutir suas necessidades e como podemos criar gráficos customizados que atendam exatamente ao que você procura.</p>
 
+    <h2>Exemplos de gráficos</h2>
+    <p>
+        <a class="thumb" href="img/top_25_most_frequent_words.png" data-lightbox="image-set" data-title="Top 25 Frequently Used Words">
+          <img src="img/top_25_most_frequent_words.png" alt="Top 25 Frequently Used Words">
+        </a>
+        <a class="thumb" href="img/top_bottom_senders_by_avg_sentiment.png" data-lightbox="image-set" data-title="Top and Bottom Senders by Average Sentiment">
+          <img src="img/top_bottom_senders_by_avg_sentiment.png" alt="Top and Bottom Senders by Average Sentiment">
+        </a>
+        <a class="thumb" href="img/topic_percentage.png" data-lightbox="image-set" data-title="Percentage of Messages by Topic">
+          <img src="img/topic_percentage.png" alt="Percentage of Messages by Topic">
+        </a>
+        <a class="thumb" href="img/word_cloud.png" data-lightbox="image-set" data-title="Word Cloud of Messages">
+          <img src="img/word_cloud.png" alt="Word Cloud of Messages">
+        </a>
+    </p>
+
     <h2>Easter Eggs</h2>
     <p>Como um bom amante de programação, jogos e open-source, colocamos um ou outro <a href="https://www.mend.io/blog/best-coding-easter-eggs/" target="_blank">easter egg</a> escondido pelo site =)</p>
+
   </div>
   <!-- Google tag (gtag.js) -->
   <script>
@@ -128,5 +169,14 @@
   <footer>
     <p>&copy; 2023 Analise Grupal. Todos os direitos reservados.</p>
   </footer>
+  <script>
+  lightbox.option({
+    'resizeDuration': 200,
+    'wrapAround': true,
+    'albumLabel': "Imagem %1 of %2",
+    'fadeDuration': 100,
+    'imageFadeDuration': 100
+  });
+</script>
 </body>
 </html>
